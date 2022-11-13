@@ -4,7 +4,7 @@ import { Link as LinkS } from 'react-scroll'
 export const NavbarContainer = styled.nav`
   background: ${({scrollNav}) => (scrollNav ? '#051937' : 'transparent')};
 	color: #F0EDEE;
-	font-family: 'Campus Personal Use';
+	font-family: 'Kdam Thmor Pro';
 	position: sticky;
   top: 0;
 	z-index:10;

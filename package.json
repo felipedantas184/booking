@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "antd": "^4.24.2",
+    "contentful": "^9.2.11",
+    "firebase": "^9.14.0",
+    "moment": "^2.29.4",
     "next": "12.1.6",
     "nprogress": "^0.2.0",
     "react": "18.1.0",

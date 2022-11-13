@@ -16,10 +16,10 @@ const Footer = () => {
           <SocialMediaWrap>
             <Link href='/' passHref>
 							<SocialLogo onClick={toggleHome}>
-								CARCARÁ
+								BookingApp
 							</SocialLogo>
             </Link>
-            <WebsiteRights>CARCARÁ © {new Date().getFullYear()} Criado por Felipe Dantas.</WebsiteRights>
+            <WebsiteRights>BookingApp © {new Date().getFullYear()} Criado por Felipe Dantas.</WebsiteRights>
             <SocialIcons>
               <SocialIconLink rel="noreferrer" href='https://www.instagram.com/aaacarcara/' target='_blank' arial-label='Facebook'>
                 <FaFacebook />

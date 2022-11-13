@@ -37,7 +37,7 @@ export const SocialLogo = styled.a`
   display: flex;
   align-items: center;
   margin-bottom: 16px;
-	font-family: 'Campus Personal Use';
+	font-family: 'Kdam Thmor Pro';
   font-weight: 400;
 `
 export const WebsiteRights = styled.small`

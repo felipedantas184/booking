@@ -30,7 +30,7 @@ const Navbar = ({ toggle }) => {
 					<Image src="/LogoCarcara.png" alt="A.A.A Carcará Logo" width={50} height={50} />
 				</LogoWrapper>
 				<Link href="/" passHref>
-					<NavbarLogo onClick={toggleHome}>CARCARÁ</NavbarLogo>
+					<NavbarLogo onClick={toggleHome}>BookingApp</NavbarLogo>
 				</Link>
 				<MobileIcon onClick={toggle}>
 					<FaBars color="#D47734" />
