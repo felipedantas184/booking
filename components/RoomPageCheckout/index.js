@@ -1,32 +1,20 @@
-import Link from 'next/link'
 import Image from 'next/image'
 import { Button, Container, GridWrapper, HalfWrapper, Heading, Subtitle, SubtitlePrice, TextWrapper, Topline } from './RoomPageCheckoutStyles';
 
 import { DatePicker, Space } from 'antd'
 import 'antd/dist/antd.css'
+const { RangePicker } = DatePicker;
 import moment from 'moment'
-import { useState } from 'react';
-import { collection, addDoc, getDocs } from 'firebase/firestore'
+
+import { useEffect, useState } from 'react';
+import { collection, addDoc, getDocs, Timestamp, updateDoc, arrayUnion, doc } from 'firebase/firestore'
 import fireDB from '../../firebase/initFirebase'
 
-const { RangePicker } = DatePicker;
+
 
 const RoomPageCheckout = ({ room }) => {
-  const { title, slug, price, featuredImage, description, resume } = room.fields
-
-  const[fromdate, setfromdate] = useState()
-  const[todate, settodate] = useState()
-  
-  const totaldays = moment.duration((moment(todate, 'DD-MM-YYYY').diff(moment(fromdate, 'DD-MM-YYYY')))).asDays()
-
-  function filterByDate(dates){
-    console.log(moment(dates[0]).format('DD-MM-YYYY'))
-    console.log(moment(dates[1]).format('DD-MM-YYYY'))
-
-    setfromdate(moment(dates[0]).format('DD-MM-YYYY'))
-    settodate(moment(dates[1]).format('DD-MM-YYYY'))
-  }
-
+  const { title, slug, price, featuredImage, resume } = room.fields
+  const [currentBookings, setCurrentBookings] = useState([])
 
   // FIREBASE //
   async function adddata() {
@@ -36,8 +24,15 @@ const RoomPageCheckout = ({ room }) => {
         age: 25 ,
         from: fromdate,
         to: todate,
-        amount: (price)*(totaldays)
+        amount: (price)*(totaldays),
+        room: title,
+        bookingdate: moment().utcOffset('-03:00').format('DD-MM-YYYY hh:mm:ss a'),
       })
+
+      await updateDoc(doc(fireDB, "rooms", "quarto-luxo"), {
+        bookingArray: arrayUnion({from: fromdate, to: todate})
+      })
+    
       alert("Reserva feita com sucesso")
     } catch(error) {
       console.log(error)
@@ -45,39 +40,58 @@ const RoomPageCheckout = ({ room }) => {
     }
   }
 
-  function addProductsData() {
-    iPhonesList.map(async (iPhone) => {
-      try {
-        await addDoc(collection(fireDB, "products"), iPhone)
-      } catch(error) {
-        console.log(error)
-        alert(error)	
-      }
-    })
-  }
-
-  async function getdata() {
+  async function getCurrentBookings() {
     try{
-      const users = await getDocs(collection(fireDB, "users"));
-      const usersArray = []
-      users.forEach((doc) => {
+      const firebaseBookings = await getDocs(collection(fireDB, "bookings"));
+      const currentBookings = []
+      firebaseBookings.forEach((doc) => {
 
         const obj = {
           id: doc.id,
           ...doc.data()
         }
 
-        usersArray.push(obj)
+        currentBookings.push(obj)
       });
 
-      console.log(usersArray)
+      setCurrentBookings(currentBookings)
     } catch(error) {
       console.log(error)
       alert(error)
     }
   }
 
+  useEffect(() => {
+		getCurrentBookings()
+	}, [])
   // FIREBASE //
+
+
+  // DATES //
+  const [fromdate, setfromdate] = useState()
+  const [todate, settodate] = useState()
+  const totaldays = moment.duration((moment(todate, 'DD-MM-YYYY').diff(moment(fromdate, 'DD-MM-YYYY')))).asDays()+1
+
+  const thisRoomBookingDates = currentBookings.filter(item => item.room == title)
+
+  function filterByDate(dates){
+    setfromdate(moment(dates[0]).format('DD-MM-YYYY'))
+    settodate(moment(dates[1]).format('DD-MM-YYYY'))
+  }
+  
+  const disabledDate = (current) => {
+    // Can not select days before today and today
+
+    //lenght --> for i 
+
+    return current &&  current < moment().endOf('day') ||
+    current < moment(moment(thisRoomBookingDates[0].to, 'DD-MM-YYYY')).endOf('day') && current > moment(moment(thisRoomBookingDates[0].from, 'DD-MM-YYYY')) ||
+    current < moment(moment(thisRoomBookingDates[1].to, 'DD-MM-YYYY')).endOf('day') && current > moment(moment(thisRoomBookingDates[1].from, 'DD-MM-YYYY'))
+  };
+  // DATES //
+
+  
+
 
   return (
     <Container>
@@ -92,8 +106,14 @@ const RoomPageCheckout = ({ room }) => {
             <SubtitlePrice>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(price)}</SubtitlePrice>
             <Subtitle>{resume}</Subtitle>
             <SubtitlePrice>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(price*totaldays)}</SubtitlePrice>
+
+            {currentBookings.filter(item => item.room == title)
+            .map((booking) => (
+              <p key={booking.bookingdate} >{booking.from} - {booking.to}</p>
+            ))}
+
           </TextWrapper>          
-          <RangePicker format="DD-MM-YYYY" onChange={filterByDate} />
+          <RangePicker disabledDate={disabledDate} format="DD-MM-YYYY" onChange={filterByDate} />
           <Button onClick={() => adddata()}>Reservar Agora</Button>
         </HalfWrapper>
       </GridWrapper>
