@@ -14,6 +14,7 @@ const Home = ({ rooms }) => {
   const [currentBookings, setCurrentBookings] = useState([])
   const [duplicatedRooms, setDuplicatedRooms] = useState(rooms)
   const [availableRooms, setAvailableRooms] = useState(rooms)
+  const [filtered, setFiltered] = useState(rooms)
 
   // DATES //
   const [fromdate, setfromdate] = useState()
@@ -31,45 +32,40 @@ const Home = ({ rooms }) => {
     setfromdate(moment(dates[0]).format('DD-MM-YYYY'))
     settodate(moment(dates[1]).format('DD-MM-YYYY'))
 
-    var temprooms = [];
-    var availability = false;
+    var temprooms = duplicatedRooms;
+    console.log('BEGIN OF THE FUNCTION - here come temprooms')
+    console.log(temprooms)
     for (const room of duplicatedRooms) {
+      var availability = true;
       if (room.currentBookings.length > 0) {
+        console.log(`Checking ${room.title} is available`)
         for (const booking of room.currentBookings) {
           if (
-            !moment(moment(dates[0]).format('YYYY-MM-DD')).isBetween(
-              convertDate(booking.fromdate),
-              convertDate(booking.todate),
-            ) &&
-            !moment(moment(dates[1]).format('YYYY-MM-DD')).isBetween(
-              convertDate(booking.fromdate),
-              convertDate(booking.todate),
-            ) &&
-            !moment(convertDate(booking.fromdate)).isBetween(
-              moment(moment(dates[0]).format('YYYY-MM-DD')),
-              moment(moment(dates[1]).format('YYYY-MM-DD')),
-            ) &&
-            !moment(convertDate(booking.todate)).isBetween(
-              moment(moment(dates[0]).format('YYYY-MM-DD')),
-              moment(moment(dates[1]).format('YYYY-MM-DD')),
-            )
+            moment(moment(dates[0]).format('YYYY-MM-DD')).isBetween(convertDate(booking.fromdate), convertDate(booking.todate)) ||
+            moment(moment(dates[1]).format('YYYY-MM-DD')).isBetween(convertDate(booking.fromdate), convertDate(booking.todate)) ||
+            moment(convertDate(booking.fromdate)).isBetween(moment(moment(dates[0]).format('YYYY-MM-DD')), moment(moment(dates[1]).format('YYYY-MM-DD'))) ||
+            moment(convertDate(booking.todate)).isBetween(moment(moment(dates[0]).format('YYYY-MM-DD')), moment(moment(dates[1]).format('YYYY-MM-DD'))) ||
+            moment(dates[0]).format('DD-MM-YYYY') == booking.fromdate ||
+            moment(dates[0]).format('DD-MM-YYYY') == booking.todate ||
+            moment(dates[1]).format('DD-MM-YYYY') == booking.fromdate ||
+            moment(dates[1]).format('DD-MM-YYYY') == booking.todate
           ) {
-            if (
-              moment(dates[0]).format('DD-MM-YYYY') !== booking.fromdate &&
-              moment(dates[0]).format('DD-MM-YYYY') !== booking.todate &&
-              moment(dates[1]).format('DD-MM-YYYY') !== booking.fromdate &&
-              moment(dates[1]).format('DD-MM-YYYY') !== booking.todate
-            ) {
-              availability = true
-            }
+            availability = false
+            console.log(`a data NÃO está livre para o quarto ${room.title} - ${room.id} : availability ${availability}`)
+          } else {
+            console.log(`a data está livre para o quarto ${room.title} : availability ${availability}`)
           }
         }
+      } else {
+        console.log(`o quarto ${room.title} não possui nenhuma reserva : availability ${availability} `)
       }
 
-      if (availability == true || room.currentBookings.length == 0) {
-        temprooms.push(room)
-        console.log(temprooms)
+      if (availability == false) {
+        temprooms = temprooms.filter((item) => item.id !== room.id)
+        console.log('retirei o quarto')
       }
+      console.log('HERE COMES FILTERED')
+      console.log(temprooms)
 
       setAvailableRooms(temprooms)
     }

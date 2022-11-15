@@ -43,6 +43,7 @@ export async function getStaticProps() {
   }
 }
 export default function Rooms({ rooms }) {
+  console.log('here come all rooms:')
   console.log(rooms)
 
   return ( 

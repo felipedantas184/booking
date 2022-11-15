@@ -29,7 +29,7 @@ const RoomPageCheckout = ({ room }) => {
         bookingdate: moment().utcOffset('-03:00').format('DD-MM-YYYY hh:mm:ss a'),
       })
 
-      await updateDoc(doc(fireDB, "rooms", "OvWpjANlZZmmE86ygDZl"), {
+      await updateDoc(doc(fireDB, "rooms", "QAV9nKGSOKgiQnaMwjtS"), {
         currentBookings: arrayUnion({fromdate: fromdate, todate: todate})
       })
     
