@@ -29,8 +29,8 @@ const RoomPageCheckout = ({ room }) => {
         bookingdate: moment().utcOffset('-03:00').format('DD-MM-YYYY hh:mm:ss a'),
       })
 
-      await updateDoc(doc(fireDB, "rooms", "quarto-luxo"), {
-        bookingArray: arrayUnion({from: fromdate, to: todate})
+      await updateDoc(doc(fireDB, "rooms", "OvWpjANlZZmmE86ygDZl"), {
+        currentBookings: arrayUnion({fromdate: fromdate, todate: todate})
       })
     
       alert("Reserva feita com sucesso")
@@ -58,7 +58,7 @@ const RoomPageCheckout = ({ room }) => {
     } catch(error) {
       console.log(error)
       alert(error)
-    }
+      } 
   }
 
   useEffect(() => {
@@ -82,15 +82,11 @@ const RoomPageCheckout = ({ room }) => {
   const disabledDate = (current) => {
     // Can not select days before today and today
 
-    //lenght --> for i 
-
-    return current &&  current < moment().endOf('day') ||
-    current < moment(moment(thisRoomBookingDates[0].to, 'DD-MM-YYYY')).endOf('day') && current > moment(moment(thisRoomBookingDates[0].from, 'DD-MM-YYYY')) ||
-    current < moment(moment(thisRoomBookingDates[1].to, 'DD-MM-YYYY')).endOf('day') && current > moment(moment(thisRoomBookingDates[1].from, 'DD-MM-YYYY'))
+    return current && current < moment().endOf("day")
   };
   // DATES //
 
-  
+
 
 
   return (
