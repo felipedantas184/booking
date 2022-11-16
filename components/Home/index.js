@@ -88,7 +88,7 @@ const Home = ({ rooms }) => {
         <HomeHeading>Escolha Seu Quarto {totaldays} </HomeHeading>
         <div style={{ width: '100%', minHeight: 50, backgroundColor: 'burlywood', display: 'flex', justifyContent: 'center' }} >
           <Space>
-            <RangePicker format="DD-MM-YYYY" onChange={filterByDate} locale={locale} allowClear={false} disabledDate={disabledDate} dropdownAlign={true} />
+            <RangePicker format="DD-MM-YYYY" onChange={filterByDate} locale={locale} allowClear={false} disabledDate={disabledDate} />
           </Space>
 
           <button onClick={() => addRoomsData()} >Click Here</button>
