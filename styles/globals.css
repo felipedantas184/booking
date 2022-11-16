@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: 'Campus Personal Use';
-  src: url('CAMPUS PERSONAL USE.woff') format("woff");
+body {
+  font-family: 'Poppins', sans-serif;
 }

@@ -34,9 +34,7 @@ import { ServerStyleSheet } from 'styled-components'
           <Head>
             <meta charSet="utf-8" />
             <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet" />
-            <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet" />
-            <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
             <link rel="icon" href="/favicon.ico" />
             <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

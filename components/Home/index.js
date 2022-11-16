@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import RoomCard from "../RoomCard";
 import { HomeContainer, HomeHeading, HomeWrapper, RoomsList } from "./HomeStyles";
-import { collection, addDoc, getDocs, Timestamp, updateDoc, arrayUnion, doc } from 'firebase/firestore'
-import fireDB from '../../firebase/initFirebase'
 
 import { DatePicker, Space } from 'antd'
 import 'antd/dist/antd.css'
@@ -11,15 +9,10 @@ import moment from 'moment';
 import locale from 'antd/lib/date-picker/locale/pt_BR';
 
 const Home = ({ rooms }) => {
-  const [currentBookings, setCurrentBookings] = useState([])
-  const [duplicatedRooms, setDuplicatedRooms] = useState(rooms)
   const [availableRooms, setAvailableRooms] = useState(rooms)
-  const [filtered, setFiltered] = useState(rooms)
-  const [totaldays, settotaldays] = useState()
-
-  // DATES //
   const [fromdate, setfromdate] = useState()
   const [todate, settodate] = useState()
+  const [totaldays, settotaldays] = useState()
 
   const convertDate = (date) => {
     const [day, month, year] = date.split('-');
@@ -27,6 +20,10 @@ const Home = ({ rooms }) => {
 
     return result
   }
+  
+  const disabledDate = (current) => {
+    return current && current < moment().endOf("day")
+  };
 
   function filterByDate(dates) {
     setfromdate(moment(dates[0]).format('DD-MM-YYYY'))
@@ -37,13 +34,10 @@ const Home = ({ rooms }) => {
       settotaldays(moment.duration((moment(dates[1], 'DD-MM-YYYY').diff(moment(dates[0], 'DD-MM-YYYY')))).asDays())
     }
 
-    var temprooms = duplicatedRooms;
-    console.log('BEGIN OF THE FUNCTION - here come temprooms')
-    console.log(temprooms)
-    for (const room of duplicatedRooms) {
+    var temprooms = rooms;
+    for (const room of rooms) {
       var availability = true;
       if (room.currentBookings.length > 0) {
-        console.log(`Checking ${room.title} is available`)
         for (const booking of room.currentBookings) {
           if (
             moment(moment(dates[0]).format('YYYY-MM-DD')).isBetween(convertDate(booking.fromdate), convertDate(booking.todate)) ||
@@ -56,32 +50,17 @@ const Home = ({ rooms }) => {
             moment(dates[1]).format('DD-MM-YYYY') == booking.todate
           ) {
             availability = false
-            console.log(`a data NÃO está livre para o quarto ${room.title} - ${room.id} : availability ${availability}`)
-          } else {
-            console.log(`a data está livre para o quarto ${room.title} : availability ${availability}`)
           }
         }
-      } else {
-        console.log(`o quarto ${room.title} não possui nenhuma reserva : availability ${availability} `)
-      }
-
+      } 
       if (availability == false) {
         temprooms = temprooms.filter((item) => item.id !== room.id)
-        console.log('retirei o quarto')
       }
-      console.log('HERE COMES FILTERED')
-      console.log(temprooms)
-
       setAvailableRooms(temprooms)
     }
   }
 
-  const disabledDate = (current) => {
-    // Can not select days before today and today
-
-    return current && current < moment().endOf("day")
-  };
-
+  
   return (
     <HomeContainer>
       <HomeWrapper>
