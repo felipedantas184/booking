@@ -70,7 +70,7 @@ const RoomPageCheckout = ({ room }) => {
   // DATES //
   const [fromdate, setfromdate] = useState()
   const [todate, settodate] = useState()
-  const totaldays = moment.duration((moment(todate, 'DD-MM-YYYY').diff(moment(fromdate, 'DD-MM-YYYY')))).asDays()+1
+  const totaldays = moment.duration((moment(todate, 'DD-MM-YYYY').diff(moment(fromdate, 'DD-MM-YYYY')))).asDays()
 
   const thisRoomBookingDates = currentBookings.filter(item => item.room == title)
 
