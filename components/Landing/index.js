@@ -1,11 +1,10 @@
 import Hero from "./Hero";
 import RoomsList from "./RoomsList";
 
-const Landing = () => {
+const Landing = ({ rooms }) => {
   return ( 
     <>
-      <Hero />
-      <RoomsList />
+      <Hero rooms={rooms} />
     </>
    );
 }
