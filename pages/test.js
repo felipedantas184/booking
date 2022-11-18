@@ -1,8 +1,8 @@
 import Head from "next/head";
+import Layout from '../components/Layout/Layout'
 import Landing from "../components/Landing/index.js";
 
 import { collection, getDocs } from 'firebase/firestore';
-import Home from '../components/Home'
 import fireDB from '../firebase/initFirebase';
 
 export async function getStaticProps() {
@@ -36,7 +36,9 @@ export default function Test({ rooms }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Landing rooms={rooms} />
+      <Layout>
+        <Landing rooms={rooms} />
+      </Layout>
     </>
   );
 }

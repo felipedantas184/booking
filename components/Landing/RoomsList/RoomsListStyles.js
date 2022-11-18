@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const RoomsListSection = styled.section`
-	padding: 80px 0;
+	padding: 40px 0;
 `
 export const RoomsListContainer = styled.div`
 	max-width: 80%;
@@ -33,11 +33,14 @@ export const RoomsCards = styled.div`
 `
 export const RoomCard = styled.div`
 	box-shadow: 0 0 20px 0 rgb(112 121 138 / 18%);
+  border-radius: 20px;
 `
 export const RoomCardImage = styled.div`
 	position: relative;
   width: 100%;
   height: 200px;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
 `
 export const RoomCardText = styled.div`
 	padding: 30px;
@@ -72,13 +75,13 @@ export const RoomCardButtonContainer = styled.div`
 `
 export const RoomCardButton = styled.button`
 	border-radius: 50px;
-  font-size: 20px;
+  font-size: 16px;
   background: #27ae60;
   border: none;
   color: #fff;
   cursor: pointer;
   font-weight: 700;
-  padding: 17px 30px;
+  padding: 8px 16px;
 `
 export const RoomCardButtonSpan = styled.span`
 	

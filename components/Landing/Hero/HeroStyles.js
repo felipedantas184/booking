@@ -7,6 +7,8 @@ export const HeroSection = styled.section`
   background-size: cover;
   height: 90vh;
   width: 100%;
+  
+  margin-top: -60px;
 `
 export const HeroContainer = styled.div`
 	max-width: 80%;
@@ -22,17 +24,17 @@ export const HeroTitle = styled.h1`
 `
 export const HeroSubtitle = styled.p`
 	color: #fff;
+  font-size: 18px;
   opacity: 0.8;
 `
 export const HeroForm = styled.form`
-	background-color: #fff;
   border-radius: 5px;
   margin-top: 50px;
-  padding: 0 20px;
+  padding: 0 20px 0 0;
 `
 export const HeroBox = styled.div`
 	
 `
 export const HeroButton = styled.button`
-	
+	display: none;
 `

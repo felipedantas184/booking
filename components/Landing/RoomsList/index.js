@@ -1,35 +1,51 @@
 import Image from "next/image";
 import { RoomCard, RoomCardButton, RoomCardButtonContainer, RoomCardButtonSpan, RoomCardImage, RoomCardLocation, RoomCardText, RoomCardTextCategory, RoomCardTextSpan, RoomCardTitle, RoomsCards, RoomsListContainer, RoomsListHeading, RoomsListSection, RoomsListSubtitle, RoomsListTitle } from "./RoomsListStyles";
 
-const RoomsList = ({ rooms }) => {
+import { DatePicker, Space } from 'antd'
+import 'antd/dist/antd.css'
+
+import moment from 'moment';
+const { RangePicker } = DatePicker;
+import locale from 'antd/lib/date-picker/locale/pt_BR';
+
+const RoomsList = ({ availableRooms, totaldays, filterByDate }) => {
+  const disabledDate = (current) => {
+    return current && current < moment().endOf("day")
+  };
+
   return (
     <RoomsListSection>
       <RoomsListContainer>
         <RoomsListHeading>
-          <RoomsListTitle>Recent Property Listed</RoomsListTitle>
-          <RoomsListSubtitle>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</RoomsListSubtitle>
+          <RoomsListTitle>Apartamentos ADUFPI</RoomsListTitle>
+          <RoomsListSubtitle>Selecione as datas que deseja para sua hospedagem. <br /> As diárias têm início às 14h e checkout às 12h.</RoomsListSubtitle>
+          <RangePicker format="DD-MM-YYYY" inputReadOnly={true} onChange={filterByDate} locale={locale} allowClear={false} disabledDate={disabledDate} />
         </RoomsListHeading>
         <RoomsCards>
           {/**MAP */}
-          {rooms.map((room) => (
+          {availableRooms.map((room) => (
             <RoomCard key={room.id}>
               <RoomCardImage>
                 <Image src={'https:' + room.imageurl} alt={room.title} layout='fill' />
               </RoomCardImage>
               <RoomCardText>
                 <RoomCardTextCategory>
-                  <RoomCardTextSpan>for sale</RoomCardTextSpan>
+                  <RoomCardTextSpan>casal</RoomCardTextSpan>
+                  <RoomCardTextSpan>Diária: {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.price)}</RoomCardTextSpan>
                   {/**ICON */}
                 </RoomCardTextCategory>
                 <RoomCardTitle>{room.title}</RoomCardTitle>
-                <RoomCardLocation>Location</RoomCardLocation>
+                <RoomCardLocation>{room.resume}</RoomCardLocation>
               </RoomCardText>
-              <RoomCardButtonContainer>
-                <div>
-                  <RoomCardButton>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.price)}</RoomCardButton>
-                  <RoomCardButtonSpan>type</RoomCardButtonSpan>
-                </div>
-              </RoomCardButtonContainer>
+
+              {(totaldays !== 0) && (
+                <RoomCardButtonContainer>
+                  <span>Total: {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room.price)}</span>
+                  <div>
+                    <RoomCardButton>Reservar Agora</RoomCardButton>
+                  </div>
+                </RoomCardButtonContainer>
+              )}
             </RoomCard>
           ))}
         </RoomsCards>
