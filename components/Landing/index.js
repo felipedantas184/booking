@@ -52,7 +52,7 @@ const Landing = ({ rooms }) => {
 
   return (
     <>
-      <RoomsList availableRooms={availableRooms} totaldays={totaldays} filterByDate={filterByDate} />
+      <RoomsList availableRooms={availableRooms} totaldays={totaldays} filterByDate={filterByDate} fromdate={fromdate} todate={todate} />
     </>
   );
 }

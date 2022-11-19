@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { RoomCard, RoomCardButton, RoomCardButtonContainer, RoomCardButtonSpan, RoomCardImage, RoomCardLocation, RoomCardText, RoomCardTextCategory, RoomCardTextSpan, RoomCardTitle, RoomsCards, RoomsListContainer, RoomsListHeading, RoomsListSection, RoomsListSubtitle, RoomsListTitle } from "./RoomsListStyles";
+import Router from 'next/router'
 
 import { DatePicker, Space } from 'antd'
 import 'antd/dist/antd.css'
@@ -7,11 +8,24 @@ import 'antd/dist/antd.css'
 import moment from 'moment';
 const { RangePicker } = DatePicker;
 import locale from 'antd/lib/date-picker/locale/pt_BR';
+import Link from "next/link";
 
-const RoomsList = ({ availableRooms, totaldays, filterByDate }) => {
+const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }) => {
+  function sendData() {
+    Router.push({
+      pathname: '/checkout',
+      query: {
+        fromdate,
+        todate
+      }
+    }/**, '/checkout' */)
+  }
+
   const disabledDate = (current) => {
     return current && current < moment().endOf("day")
   };
+
+
 
   return (
     <RoomsListSection>
@@ -42,7 +56,9 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate }) => {
                 <RoomCardButtonContainer>
                   <span>Total: {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room.price)}</span>
                   <div>
-                    <RoomCardButton>Reservar Agora</RoomCardButton>
+                    <RoomCardButton onClick={() => sendData()} >
+                      Reservar Agora
+                    </RoomCardButton>
                   </div>
                 </RoomCardButtonContainer>
               )}

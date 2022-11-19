@@ -4,7 +4,7 @@ export const RoomsListSection = styled.section`
 	padding: 40px 0;
 `
 export const RoomsListContainer = styled.div`
-	max-width: 80%;
+	max-width: 1024px;
   margin: auto;
 `
 export const RoomsListHeading = styled.div`
@@ -82,6 +82,10 @@ export const RoomCardButton = styled.button`
   cursor: pointer;
   font-weight: 700;
   padding: 8px 16px;
+
+  a {
+    color: #fff !important;
+  }
 `
 export const RoomCardButtonSpan = styled.span`
 	

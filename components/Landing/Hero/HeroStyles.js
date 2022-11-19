@@ -11,7 +11,7 @@ export const HeroSection = styled.section`
   margin-top: -60px;
 `
 export const HeroContainer = styled.div`
-	max-width: 80%;
+	max-width: 1024px;
   margin: auto;
   padding-top: 15%;
 `
