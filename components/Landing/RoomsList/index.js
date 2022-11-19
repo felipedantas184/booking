@@ -11,9 +11,9 @@ import locale from 'antd/lib/date-picker/locale/pt_BR';
 import Link from "next/link";
 
 const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }) => {
-  function sendData() {
+  function sendData(room) {
     Router.push({
-      pathname: '/checkout',
+      pathname: `/checkout/${room.id}`,
       query: {
         fromdate,
         todate
@@ -56,7 +56,7 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
                 <RoomCardButtonContainer>
                   <span>Total: {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room.price)}</span>
                   <div>
-                    <RoomCardButton onClick={() => sendData()} >
+                    <RoomCardButton onClick={() => sendData(room)}>
                       Reservar Agora
                     </RoomCardButton>
                   </div>
