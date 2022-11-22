@@ -1,6 +1,7 @@
 import moment from "moment";
 import Image from "next/image";
 import { useRouter } from 'next/router'
+import Router from 'next/router'
 
 import { CheckoutBottomContainer, CheckoutBottomContainerOne, CheckoutBottomContainerTwo, CheckoutBox, CheckoutBoxHorizontal, CheckoutBoxHorizontalGrid2, CheckoutBoxHorizontalGrid3, CheckoutButton, CheckoutDescription, CheckoutEnd, CheckoutFeatures, CheckoutImageWrapper, CheckoutInfo, CheckoutLabel, CheckoutName, CheckoutSection, CheckoutTitle, CheckoutTopContainer, CheckoutTopContainerHeading, CheckoutTopContainerMiddle, CheckoutTopContainerPrice, CheckoutTopContainerTitle, CheckoutTopContainerType, CheckoutValue } from "./CheckoutStyles";
 
@@ -26,8 +27,9 @@ const Checkout = ({ room, roomId }) => {
       await updateDoc(doc(fireDB, "rooms", roomId), {
         currentBookings: arrayUnion({fromdate: fromdate, todate: todate})
       })
-    
+  
       alert("Reserva feita com sucesso")
+      Router.push({pathname: '/'})
     } catch(error) {
       console.log(error)
       alert(error)

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { RoomCard, RoomCardButton, RoomCardButtonContainer, RoomCardButtonSpan, RoomCardImage, RoomCardLocation, RoomCardText, RoomCardTextCategory, RoomCardTextSpan, RoomCardTitle, RoomsCards, RoomsListContainer, RoomsListHeading, RoomsListSection, RoomsListSubtitle, RoomsListTitle } from "./RoomsListStyles";
 import Router from 'next/router'
 
-import { DatePicker, Space } from 'antd'
+import { DatePicker } from 'antd'
 import 'antd/dist/antd.css'
 
 import moment from 'moment';
