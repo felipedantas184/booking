@@ -41,7 +41,7 @@ const Checkout = ({ room, roomId }) => {
       <CheckoutSection>
         <CheckoutTopContainer>
           <CheckoutTopContainerHeading>
-            <CheckoutTopContainerTitle>{room.title}</CheckoutTopContainerTitle>
+            <CheckoutTopContainerTitle>{room ? room.title : ''}</CheckoutTopContainerTitle>
             <CheckoutTopContainerType>Casal</CheckoutTopContainerType>
           </CheckoutTopContainerHeading>
           <CheckoutTopContainerPrice>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.price)}</CheckoutTopContainerPrice>
@@ -71,7 +71,7 @@ const Checkout = ({ room, roomId }) => {
               <CheckoutBoxHorizontalGrid2>
                 <CheckoutBox>
                   <CheckoutLabel>Quarto</CheckoutLabel>
-                  <CheckoutName>{room.title}</CheckoutName>
+                  <CheckoutName>{room ? room.title : ''}</CheckoutName>
                 </CheckoutBox>
                 <CheckoutBox>
                   <CheckoutLabel>Categoria</CheckoutLabel>
