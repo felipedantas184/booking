@@ -44,17 +44,17 @@ const Checkout = ({ room, roomId }) => {
             <CheckoutTopContainerTitle>{room ? room.title : ''}</CheckoutTopContainerTitle>
             <CheckoutTopContainerType>Casal</CheckoutTopContainerType>
           </CheckoutTopContainerHeading>
-          <CheckoutTopContainerPrice>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.price)}</CheckoutTopContainerPrice>
+          <CheckoutTopContainerPrice>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room ? room.price : 0)}</CheckoutTopContainerPrice>
         </CheckoutTopContainer>
 
         <CheckoutBottomContainer>
           <CheckoutBottomContainerOne>
             <CheckoutImageWrapper>
-              <Image src={'https:' + room.imageurl} alt={room.title} layout="fill" />
+              <Image src={'https:' + room ? room.imageurl : ''} alt={room ? room.title : ''} layout="fill" />
             </CheckoutImageWrapper>
             <CheckoutFeatures>
             </CheckoutFeatures>
-            <CheckoutDescription>{room.resume}</CheckoutDescription>
+            <CheckoutDescription>{room ? room.resume : ''}</CheckoutDescription>
           </CheckoutBottomContainerOne>
 
           <CheckoutBottomContainerTwo>
@@ -93,7 +93,7 @@ const Checkout = ({ room, roomId }) => {
               <p style={{textAlign:'right', marginBottom: 0}}>{totaldays} diárias</p>
               <CheckoutBoxHorizontal>
                 <CheckoutLabel>Valor Total:</CheckoutLabel>
-                <CheckoutValue>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room.price)}</CheckoutValue>
+                <CheckoutValue>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room ? room.price : 0)}</CheckoutValue>
               </CheckoutBoxHorizontal>
               <CheckoutButton onClick={() => adddata()}>Reservar Agora</CheckoutButton>
             </CheckoutEnd>
