@@ -93,7 +93,7 @@ const Checkout = ({ room, roomId }) => {
               <p style={{textAlign:'right', marginBottom: 0}}>{totaldays} diárias</p>
               <CheckoutBoxHorizontal>
                 <CheckoutLabel>Valor Total:</CheckoutLabel>
-                <CheckoutValue>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room ? room.price : 0)}</CheckoutValue>
+                <CheckoutValue>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room ? room.price*totaldays : 0)}</CheckoutValue>
               </CheckoutBoxHorizontal>
               <CheckoutButton onClick={() => adddata()}>Reservar Agora</CheckoutButton>
             </CheckoutEnd>
