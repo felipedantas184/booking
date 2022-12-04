@@ -32,7 +32,7 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
       <RoomsListContainer>
         <RoomsListHeading>
           <RoomsListTitle>Apartamentos ADUFPI</RoomsListTitle>
-          <RoomsListSubtitle>Selecione as datas que deseja para sua hospedagem. <br /> As diárias têm início às 14h e checkout às 12h.</RoomsListSubtitle>
+          <RoomsListSubtitle>Selecione as datas da hospedagem. <br /> As diárias têm início às 14h e checkout às 12h.</RoomsListSubtitle>
           <RangePicker format="DD-MM-YYYY" inputReadOnly={true} onChange={filterByDate} locale={locale} allowClear={false} disabledDate={disabledDate} />
         </RoomsListHeading>
         <RoomsCards>

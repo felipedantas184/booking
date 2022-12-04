@@ -6,11 +6,19 @@ export const RoomsListSection = styled.section`
 export const RoomsListContainer = styled.div`
 	max-width: 1024px;
   margin: auto;
+
+  @media screen and (max-width: 720px) {
+    padding: 0 16px;
+  }
 `
 export const RoomsListHeading = styled.div`
 	text-align: center;
   width: 60%;
   margin: auto;
+
+  @media screen and (max-width: 720px) {
+    width: 100%;
+  }
 `
 export const RoomsListTitle = styled.h1`
   color: #2d3954;

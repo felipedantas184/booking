@@ -7,7 +7,7 @@ import { animateScroll as scroll } from 'react-scroll';
 import { useAuth } from '../../../context/AuthContext';
 import { useRouter } from 'next/router';
 
-const Navbar = ({ toggle }) => {
+const Navbar = ({ toggle, userName }) => {
 	const [scrollNav, setScrollNav] = useState(false)
 	const changeNav = () => {
 		if (window.scrollY >= 60) {
@@ -32,17 +32,20 @@ const Navbar = ({ toggle }) => {
 	return (
 		<NavbarContainer scrollNav={scrollNav}>
 			<NavbarWrapper>
-				<LogoWrapper>
-					<Image src="/LogoCarcara.png" alt="A.A.A Carcará Logo" width={50} height={50} />
-				</LogoWrapper>
 				<Link href="/" passHref>
 					<NavbarLogo onClick={toggleHome}>BookingApp</NavbarLogo>
 				</Link>
 				{user ? (
-					<button onClick={() => {
-						logout() 
-						router.push('/login')
-					}}>Logout</button>
+					<div style={{display: 'flex', alignItems: 'center', gap: 8}} >
+						<span>Olá, {userName}</span>
+
+						<button style={{backgroundColor: '#F1F2F3', padding: 4, color: '#000'}} onClick={() => {
+							logout() 
+							router.push('/login')
+						}}>Logout</button>
+
+					</div>
+					
 				) : (
 					<>
 						<Link href="/singup">Sing Up</Link>
@@ -50,9 +53,10 @@ const Navbar = ({ toggle }) => {
 					</>
 				)
 				}
-				<MobileIcon onClick={toggle}>
+				{/** <MobileIcon onClick={toggle}>
 					<FaBars color="#D47734" />
 				</MobileIcon>
+			 	*/}
 			</NavbarWrapper>
 		</NavbarContainer>
 	);

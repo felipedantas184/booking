@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link as LinkS } from 'react-scroll'
 
 export const NavbarContainer = styled.nav`
-  background: ${({scrollNav}) => (scrollNav ? '#051937' : '#051937')};
+  background: ${({scrollNav}) => (scrollNav ? '#13131A' : '#13131A')};
 	color: #F0EDEE;
 	font-family: 'Kdam Thmor Pro';
 	position: sticky;

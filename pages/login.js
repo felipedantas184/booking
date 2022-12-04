@@ -1,6 +1,7 @@
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { useAuth } from "../context/AuthContext"
+import LoginPage from "../components/LoginPage"
 
 const Login = () => {
   const router = useRouter()
@@ -25,38 +26,7 @@ const Login = () => {
   }
 
   return (
-    <div
-      style={{width: '40%', margin: 'auto'}}>
-      <h1 className="text-center my-3 ">Login</h1>
-      <form onSubmit={handleLogin}>
-        <h3>Credentials</h3>
-        <input 
-          type="email"
-          placeholder="Enter email"
-          required
-          onChange={(e) =>
-            setData({
-              ...data,
-              email: e.target.value,
-            })
-          }
-          value={data.email} 
-        />
-        <input 
-          type="password"
-          placeholder="Password"
-          required
-          onChange={(e) =>
-            setData({
-              ...data,
-              password: e.target.value,
-            })
-          }
-          value={data.password}
-        />
-        <button type="submit" >Create User</button>
-      </form>
-    </div>
+    <LoginPage />
   )
 }
 

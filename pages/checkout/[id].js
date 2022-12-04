@@ -4,6 +4,8 @@ import Layout from '../../components/Layout/Layout'
 
 import fireDB from '../../firebase/initFirebase'
 import { collection, getDoc, getDocs, doc } from 'firebase/firestore'
+import { useAuth } from '../../context/AuthContext';
+import { useEffect, useState } from 'react';
 
 export const getStaticPaths = async () => {
   const firebaseRooms = await getDocs(collection(fireDB, "rooms"));
@@ -45,13 +47,26 @@ export const getStaticProps = async (context) => {
 // CONTENTFUL //
 
 export default function RoomCheckout({ room, roomId }) {
+  const { user } = useAuth()
+	const [userName, setUserName] = useState()
+
+	useEffect(() => {
+		async function getUserName() {
+			const result = await getDoc(doc(fireDB, 'users', user.uid))
+			setUserName(result.data().name)
+		}
+
+		getUserName()
+	}, [user])
+
+
   return (
     <>
     <Head>
       <title>Página Individual</title>
     </Head>
     <Layout>
-      <Checkout room={room} roomId={roomId} /> 
+      <Checkout room={room} roomId={roomId} userName={userName} /> 
     </Layout>
     </>
   )

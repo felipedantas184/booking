@@ -8,16 +8,19 @@ import { CheckoutBottomContainer, CheckoutBottomContainerOne, CheckoutBottomCont
 import { collection, addDoc, updateDoc, arrayUnion, doc } from 'firebase/firestore'
 import fireDB from '../../firebase/initFirebase'
 
+import { useAuth } from "../../context/AuthContext";
 
-const Checkout = ({ room, roomId }) => {
+const Checkout = ({ room, roomId, userName }) => {
   const router = useRouter();
   const { fromdate, todate } = router.query; 
   const totaldays = moment.duration((moment(todate, 'DD-MM-YYYY').diff(moment(fromdate, 'DD-MM-YYYY')))).asDays() 
 
+  const { user } = useAuth()
+
   async function adddata() {
     try{
       await addDoc(collection(fireDB, "bookings") , {
-        userId: 'xf7RLJfAaoMpHPjlMGG8', 
+        userId: user.uid, 
         from: fromdate,
         to: todate,
         roomId: roomId,
@@ -62,11 +65,11 @@ const Checkout = ({ room, roomId }) => {
               <CheckoutTitle>Confirmação</CheckoutTitle>
               <CheckoutBox>
                 <CheckoutLabel>Nome</CheckoutLabel>
-                <CheckoutName>Ricardo Augusto Dantas</CheckoutName>
+                <CheckoutName>{userName}</CheckoutName>
               </CheckoutBox>
               <CheckoutBox>
                 <CheckoutLabel>E-mail</CheckoutLabel>
-                <CheckoutName>ricardo@tecdata.com.br</CheckoutName>
+                <CheckoutName>{user.email}</CheckoutName>
               </CheckoutBox>
               <CheckoutBoxHorizontalGrid2>
                 <CheckoutBox>
