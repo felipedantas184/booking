@@ -26,6 +26,8 @@ export const NavbarLogo = styled.a`
 	color: #FFF;
 	font-size: 26px;
   cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
   
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-tap-highlight-color: transparent;
@@ -52,6 +54,7 @@ export const LogoWrapper = styled.div`
 export const MobileIcon = styled.div`
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  display: none;
 
   @media screen and (max-width: 768px) {
     display: block;
@@ -70,21 +73,23 @@ export const NavbarMenu = styled.ul`
 	align-items: center;
 	list-style: none;
 
+  margin: 0 !important;
+
+  font-family: 'Poppins', sans-serif;
+
 	@media screen and (max-width: 768px) {
     display: none;
   }
 `
 export const NavbarItem = styled.li`
 	height: 60px;
-`
-export const NavbarLinks = styled(LinkS)`
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 	padding: 0 1rem;
-	cursor: pointer;
+  gap: 8px;
+  
+  cursor: pointer;
 	transition: all 0.2s ease-in-out;
 
 	&:hover {
@@ -94,6 +99,20 @@ export const NavbarLinks = styled(LinkS)`
 	&.active {
   border-bottom: 3px solid #F45B69
   }
+`
+export const NavbarLink = styled.span`
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`
+export const NavbarLogout = styled.div`
+  height: 100%;
+  padding: 4px 8px;
+  background-color: aquamarine;
+  color: #000;
+
+  border-radius: 8px;
 `
 export const NavbarBtn = styled.nav`
   display: flex;

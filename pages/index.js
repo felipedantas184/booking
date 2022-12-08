@@ -21,8 +21,8 @@ export async function getStaticProps() {
     }
   }
 }
-export default function Rooms({ rooms }) {
 
+export default function Rooms({ rooms }) {
   return ( 
     <>
       <Layout>
