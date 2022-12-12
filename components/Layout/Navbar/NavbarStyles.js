@@ -1,5 +1,4 @@
 import styled from "styled-components"; 
-import { Link as LinkS } from 'react-scroll'
 
 export const NavbarContainer = styled.nav`
   background: ${({scrollNav}) => (scrollNav ? '#13131A' : '#13131A')};
@@ -100,11 +99,16 @@ export const NavbarItem = styled.li`
   border-bottom: 3px solid #F45B69
   }
 `
-export const NavbarLink = styled.span`
+export const NavbarLink = styled.div`
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
 `
 export const NavbarLogout = styled.div`
   height: 100%;

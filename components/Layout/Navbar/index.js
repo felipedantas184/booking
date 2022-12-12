@@ -47,7 +47,10 @@ const Navbar = ({ toggle, userName }) => {
 							<FaUser />
 							<NavbarLink>{userName}</NavbarLink>
 						</NavbarItem>
-						<NavbarItem>
+						<NavbarItem onClick={() => {
+							logout() 
+							router.push('/login')
+						}} >
 							<FaSignOutAlt />
 							<NavbarLink>Logout</NavbarLink>
 						</NavbarItem>
