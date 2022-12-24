@@ -4,7 +4,7 @@ export const RoomsListSection = styled.section`
 	padding: 40px 0;
 `
 export const RoomsListContainer = styled.div`
-	max-width: 1024px;
+	max-width: 1080px;
   margin: auto;
 
   @media screen and (max-width: 720px) {
@@ -13,18 +13,15 @@ export const RoomsListContainer = styled.div`
 `
 export const RoomsListHeading = styled.div`
 	text-align: center;
-  width: 60%;
+  width: 100%;
   margin: auto;
-
-  @media screen and (max-width: 720px) {
-    width: 100%;
-  }
 `
 export const RoomsListTitle = styled.h1`
   color: #2d3954;
   font-weight: 600;
   text-transform: capitalize;
-  font-size: 35px;
+  font-size: 24px;
+  margin-bottom: 4px;
 `
 export const RoomsListSubtitle = styled.p`
 	color: #72809d;
@@ -40,8 +37,9 @@ export const RoomsCards = styled.div`
   }
 `
 export const RoomCard = styled.div`
-	box-shadow: 0 0 20px 0 rgb(112 121 138 / 18%);
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
   border-radius: 20px;
+  background-color: #F6F6F6;
 `
 export const RoomCardImage = styled.div`
 	position: relative;
@@ -51,7 +49,7 @@ export const RoomCardImage = styled.div`
   overflow: hidden;
 `
 export const RoomCardText = styled.div`
-	padding: 30px;
+	padding: 16px;
 `
 export const RoomCardTextCategory = styled.div`
 	align-items: center;
@@ -59,37 +57,41 @@ export const RoomCardTextCategory = styled.div`
   justify-content: space-between;
 `
 export const RoomCardTextSpan = styled.span`
-	border-radius: 2px;
+	border-radius: 4px;
   display: inline-block;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   padding: 4px 15px;
-  background: rgba(255, 152, 0, 0.1);
-  color: rgb(255, 152, 0);
+  background: rgba(235, 87, 87, 0.1);
+  color: #EB5757;
 `
 export const RoomCardTitle = styled.h4`
 	font-weight: 500;
   margin-top: 10px;
+  color: #13131A;
 `
 export const RoomCardLocation = styled.p`
-	color: #72809d;
+  color: #4F4F4F;
+  margin-bottom: 0 !important;
 `
 export const RoomCardButtonContainer = styled.div`
-	border-top: 1px solid #e4e8f3;
+	border-top: 1px solid #cccfd9;
   padding: 10px 30px;
   align-items: center;
   display: flex;
   justify-content: space-between;
 `
 export const RoomCardButton = styled.button`
-	border-radius: 50px;
-  font-size: 16px;
-  background: #27ae60;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  font-weight: 700;
   padding: 8px 16px;
+  text-transform: capitalize;
+  border-radius: 8px;
+  border: 0;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+  font-family: 'Poppins' !important;
+  background-color: #EB5757;
+  cursor: pointer;
 
   a {
     color: #fff !important;

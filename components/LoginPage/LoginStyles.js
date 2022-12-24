@@ -1,39 +1,35 @@
 import styled from 'styled-components'
 
 export const LoginSection = styled.section`
-	padding: 0;
+  background-color: #EB5757;
+  padding: 0;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-
-  @media screen and (max-width: 720px) {
-    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-  }
 `
 export const LoginContainer = styled.div`
 	width: 75vw;
+  max-width: 800px;
   height: 80vh;
-  max-width: 1024px;
-  border-radius: 20px;
+  max-height: 500px;
   min-height: 500px;
   margin: auto;
 
   display: flex;
   flex-direction: row;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 
   @media screen and (max-width: 720px) {
     width: 100%;
     padding: 16px;
-
     flex-direction: column-reverse;
   }
 `
 export const LoginForm = styled.form`
 	flex: 5;
+  background-color: #FFF;
   padding: 16px;
   border-radius: 20px 0 0 20px; 
 
@@ -41,8 +37,6 @@ export const LoginForm = styled.form`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-
-  background-color: #FFF;
 
   @media screen and (max-width: 720px) {
     border-radius: 20px; 
@@ -64,11 +58,14 @@ export const FormTitle = styled.h1`
   margin-bottom: 8px !important;
 `
 export const FormSubtitle = styled.p`
-	color: #72809d;
+	color: #13131A;
+  font-weight: 500;
   margin-bottom: 0 !important;
+  margin-top: 8px;
 `
 export const LoginMessage = styled.div`
-	flex: 4;
+	flex: 3;
+  background-color: #4F4F4F;
   padding: 16px;
   border-radius: 0 20px 20px 0;
 
@@ -78,26 +75,36 @@ export const LoginMessage = styled.div`
   align-items: center;
   text-align: center;
 
-  background-color: #13131A;
-  background: linear-gradient(3600deg, rgba(9,9,121,1) 33%, rgba(2,0,36,1) 100%);
-
   @media screen and (max-width: 720px) {
     display: none;
     border-radius: 20px 20px 0 0; 
   }
 `
 export const InputWrap = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
+`
+export const InputGroup = styled.div`
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+`
+export const InputLabel = styled.label`
+  font-size: 14px;
+  color: #13131A;
+  margin-left: 12px;
+  margin-bottom: 4px;
 `
 export const Input = styled.input`
   max-width: 300px;
-  border-radius: 32px;
+  border-radius: 8px;
+  border: none;
+  background-color: #F1F1F1;
+  font-size: 14px;
   width: 100%;
-  padding: 12px 24px; 
+  padding: 8px 12px; 
   font-family: 'Poppins' !important;
   outline: none;
 `
@@ -109,18 +116,17 @@ export const ButtonWrap = styled.div`
   gap: 8px;
 `
 export const FormButton = styled.button`
-  padding: 12px;
-  width: 50%;
+  height: 40px;
+  width: 200px;
   text-transform: capitalize;
-  border-radius: 32px;
+  border-radius: 8px;
   border: 0;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   color: #fff;
   font-family: 'Poppins' !important;
 
-  background: rgba(0,212,255,1);
-  background: linear-gradient(90deg, rgba(9,9,121,1) 33%, rgba(0,212,255,1) 100%);
+  background-color: #EB5757;
 `
 export const FormSpan = styled.span`
   font-size: 14px;
@@ -128,16 +134,17 @@ export const FormSpan = styled.span`
   margin-top: 4px;
 `
 export const MessageTitle = styled.h1`
-  color: #E5E5E5;
+  color: #F1F1F1;
   font-weight: 600;
   text-transform: capitalize;
-  font-size: 28px;
+  font-size: 18px;
+  margin-bottom: 16px;
 
   max-width: 300px;
 `
 export const MessageSubtitle = styled.p`
-	color: #D4D4D4;
-  margin-top: 16px;
-
+	color: #F1F1F1;
   max-width: 350px;
+  margin: 0;
+  font-size: 14px;
 `

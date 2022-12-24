@@ -12,50 +12,40 @@ export const CheckoutSection = styled.section`
 export const CheckoutTopContainer = styled.div`
   max-width: 1024px;
   margin: auto;
+  margin-bottom: 16px;
 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`
-export const CheckoutTopContainerHeading = styled.div`
-  text-align: left;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 8px;
+  }
 `
 export const CheckoutTopContainerTitle = styled.h1`
-  color: #2d3954;
+  color: #13131A;
   font-weight: 600;
   text-transform: capitalize;
-  font-size: 35px;
+  font-size: 32px;
 
   margin-bottom: 0px !important;
   margin-top: 0 !important;
-  color: inherit !important;
   font-weight: 600 !important;
 
   @media screen and (max-width: 768px) {
-    font-size: 24px;
+    font-size: 20px;
   }
-`
-export const CheckoutTopContainerType = styled.p`
-  margin-top: 0 !important;
-	color: #72809d;
-
-  margin-bottom: 4px !important;
-
-  @media screen and (max-width: 768px) {
-    font-size: 14px;
-  }
-`
-export const CheckoutTopContainerMiddle = styled.div`
-  
 `
 export const CheckoutTopContainerPrice = styled.p`
   margin-top: 0 !important;
   margin-bottom: 0 !important;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 16px;
+  color: #13131A;
 
   @media screen and (max-width: 768px) {
-    font-size: 16px;
+    font-size: 14px;
   }
 `
 export const CheckoutBottomContainer = styled.div`
@@ -80,8 +70,9 @@ export const CheckoutImageWrapper = styled.div`
   width: 100%;
   height: 500px;
 
-  border-radius: 0 20px 0 20px;
+  border-radius: 8px;
   overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 
   @media screen and (max-width: 768px) {
     height: 350px;
@@ -98,30 +89,51 @@ export const CheckoutDescription = styled.p`
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   font-size: 14px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`
+export const CheckoutDescriptionTime = styled.p`
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  font-size: 14px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 `
 export const CheckoutBottomContainerTwo = styled.div`
   flex: 2;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 500px;
 
-  padding: 0 0 20px 0;
+  @media screen and (max-width: 768px) {
+    gap: 24px
+  }
 `
 export const CheckoutInfo = styled.div`
-  border-radius: 16px;
-  border: 1px solid #e4e8f3;
+  border-radius: 8px;
+  border: 1px solid #BDBDBD;
+  color: #13131A;
+
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 `
 export const CheckoutTitle = styled.h2`
   padding: 20px 20px 0 20px;
-  margin-bottom: 24px !important;
+  margin-bottom: 16px !important;
+  font-size: 18px;
 
   margin-top: 0 !important;
   color: inherit !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 `
 export const CheckoutBox = styled.div`
   display: flex;
   flex-direction: column;
-
+  gap: 4px;
   padding: 0 20px 0 20px;
   margin-bottom: 16px;
 `
@@ -129,10 +141,13 @@ export const CheckoutLabel = styled.p`
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   font-weight: 600;
+  font-size: 14px;
+  color: #13131A;
 `
 export const CheckoutName = styled.p`
   margin-top: 0 !important;
   margin-bottom: 0 !important;
+  font-size: 14px;
   
 `
 export const CheckoutBoxHorizontal = styled.div`
@@ -146,21 +161,30 @@ export const CheckoutBoxHorizontalGrid2 = styled.div`
 `
 export const CheckoutEnd = styled.div`
   padding: 20px;
-  margin-top: 40px;
-  border-radius: 16px;
-  border: 1px solid #c2c6d1;
+  border-radius: 8px;
+  border: 1px solid #BDBDBD;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 `
 export const CheckoutValue = styled.span`
+  font-size: 16px;
+  font-weight: 600;
+  color: #13131A;
 `
 export const CheckoutButton = styled.button`
-	width: 100%;
-  border-radius: 8px;
-  font-size: 16px;
-  background: #051937;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  font-weight: 700;
-  padding: 17px 30px;
+	padding: 8px 16px;
+  width: 100%;
   margin-top: 16px;
+  text-transform: capitalize;
+  border-radius: 8px;
+  border: 0;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+  font-family: 'Poppins' !important;
+  background-color: #EB5757;
+  cursor: pointer;
+
+  a {
+    color: #fff !important;
+  }
 `

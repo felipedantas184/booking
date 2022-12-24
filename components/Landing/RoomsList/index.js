@@ -32,11 +32,10 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
       <RoomsListContainer>
         <RoomsListHeading>
           <RoomsListTitle>Apartamentos ADUFPI</RoomsListTitle>
-          <RoomsListSubtitle>Selecione as datas da hospedagem. <br /> As diárias têm início às 14h e checkout às 12h.</RoomsListSubtitle>
+          <RoomsListSubtitle>Selecione as datas da hospedagem</RoomsListSubtitle>
           <RangePicker format="DD-MM-YYYY" inputReadOnly={true} onChange={filterByDate} locale={locale} allowClear={false} disabledDate={disabledDate} />
         </RoomsListHeading>
         <RoomsCards>
-          {/**MAP */}
           {availableRooms.map((room) => (
             <RoomCard key={room.id}>
               <RoomCardImage>
@@ -44,9 +43,7 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
               </RoomCardImage>
               <RoomCardText>
                 <RoomCardTextCategory>
-                  <RoomCardTextSpan>casal</RoomCardTextSpan>
                   <RoomCardTextSpan>Diária: {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.price)}</RoomCardTextSpan>
-                  {/**ICON */}
                 </RoomCardTextCategory>
                 <RoomCardTitle>{room.title}</RoomCardTitle>
                 <RoomCardLocation>{room.resume}</RoomCardLocation>
@@ -54,12 +51,11 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
 
               {(totaldays !== 0) && (
                 <RoomCardButtonContainer>
-                  <span>Total: {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room.price)}</span>
-                  <div>
-                    <RoomCardButton onClick={() => sendData(room)}>
-                      Reservar Agora
-                    </RoomCardButton>
-                  </div>
+                  <span style={{fontWeight: '500'}} >{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room.price)}</span>
+
+                  <RoomCardButton onClick={() => sendData(room)}>
+                    Reservar Agora
+                  </RoomCardButton>
                 </RoomCardButtonContainer>
               )}
             </RoomCard>

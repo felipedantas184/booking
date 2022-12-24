@@ -1,4 +1,4 @@
-import { ButtonWrap, FormButton, FormHeading, FormSpan, FormSubtitle, FormTitle, Input, InputWrap, LoginContainer, LoginForm, LoginMessage, LoginSection, MessageSubtitle, MessageTitle } from "./SignupStyles";
+import { ButtonWrap, FormButton, FormHeading, FormSpan, FormSubtitle, FormTitle, Input, InputGroup, InputLabel, InputSplit, InputSplitGroup, InputWrap, LoginContainer, LoginForm, LoginMessage, LoginSection, MessageSubtitle, MessageTitle } from "./SignupStyles";
 
 import { useRouter } from "next/router"
 import { useState } from "react"
@@ -6,6 +6,7 @@ import { useAuth } from "../../context/AuthContext"
 import Link from "next/link";
 import fireDB, { auth } from "../../firebase/initFirebase";
 import { doc, setDoc } from "firebase/firestore";
+import Image from "next/image";
 
 const SignupPage = () => {
   const router = useRouter()
@@ -14,6 +15,9 @@ const SignupPage = () => {
     email: '',
     password: '',
     name: '',
+    surname: '',
+    phone: '',
+    cpf: ''
   })
 
   const handleSignup = async (e) => {
@@ -22,7 +26,11 @@ const SignupPage = () => {
     try {
       await signup(data.email, data.password).then(auth => {
         return setDoc(doc(fireDB, "users", auth.user.uid), {
-          name: data.name
+          name: data.name,
+          surname: data.surname,
+          phone: data.phone,
+          cpf: data.cpf,
+          email: data.email
         })
       })
       router.push('/')
@@ -39,29 +47,78 @@ const SignupPage = () => {
       <LoginContainer>
         <LoginForm onSubmit={handleSignup}>
           <FormHeading>
-            <FormTitle>ADUFPI</FormTitle>
-            <FormSubtitle>Cadastre-se para prosseguir</FormSubtitle>
+            <Image src={'/images/adufpi_logo.png'} width={200} height={66} alt='ADUFPI'  />
+            <FormSubtitle>Cadastro</FormSubtitle>
           </FormHeading>
           <InputWrap>
-            <Input type={'text'} placeholder="Nome" required
-              onChange={(e) =>
-                setData({
-                  ...data,
-                  name: e.target.value,
-                })
-              }
-              value={data.name}
-            />
-            <Input type={'email'} placeholder="E-mail" required
-              onChange={(e) =>
-                setData({
-                  ...data,
-                  email: e.target.value,
-                })
-              }
-              value={data.email}
-            />
-            <Input type={'password'} placeholder="Senha" required
+            <InputSplit>
+              <InputSplitGroup>
+                <InputLabel>Nome</InputLabel>
+                <Input type={'text'} placeholder="Seu nome" required style={{textTransform: 'capitalize'}}
+                onChange={(e) =>
+                  setData({
+                    ...data,
+                    name: e.target.value,
+                  })
+                }
+                value={data.name}
+              />
+              </InputSplitGroup>
+              <InputSplitGroup>
+                <InputLabel>Sobrenome</InputLabel>
+                <Input type={'text'} placeholder="Seu sobrenome" required style={{textTransform: 'capitalize'}}
+                onChange={(e) =>
+                  setData({
+                    ...data,
+                    surname: e.target.value,
+                  })
+                }
+                value={data.surname}
+              />
+              </InputSplitGroup>
+            </InputSplit>
+            <InputSplit>
+              <InputSplitGroup>
+                <InputLabel>Telefone</InputLabel>
+                <Input type={'number'} placeholder="Ex: 86995185757" required
+                onChange={(e) =>
+                  setData({
+                    ...data,
+                    phone: e.target.value,
+                  })
+                }
+                value={data.phone}
+              />
+              </InputSplitGroup>
+              <InputSplitGroup>
+                <InputLabel>CPF</InputLabel>
+                <Input type={'number'} placeholder="Ex: 05620204383" required
+                onChange={(e) =>
+                  setData({
+                    ...data,
+                    cpf: e.target.value,
+                  })
+                }
+                value={data.cpf}
+              />
+              </InputSplitGroup>
+            </InputSplit>
+            <InputGroup>
+              <InputLabel>E-mail</InputLabel>
+              <Input type={'email'} placeholder="Digite seu e-mail" required 
+                onChange={(e) =>
+                  setData({
+                    ...data,
+                    email: e.target.value,
+                  })
+                }
+                value={data.email}
+              />
+            </InputGroup>
+            
+            <InputGroup>
+              <InputLabel>Senha</InputLabel>
+              <Input type={'password'} placeholder="Digite sua senha" required 
               onChange={(e) =>
                 setData({
                   ...data,
@@ -69,11 +126,12 @@ const SignupPage = () => {
                 })
               }
               value={data.password}
-            />
+              />
+            </InputGroup>
           </InputWrap>
           <ButtonWrap>
-            <FormButton type="submit" >Criar Conta</FormButton>
-            <FormSpan>Já possui uma conta? <Link href={'/login'} >Entre</Link></FormSpan>
+            <FormButton type="submit" >Entrar</FormButton>
+            <FormSpan>Já possui uma conta? <Link href={'/login'}>Entre</Link></FormSpan>
           </ButtonWrap>
         </LoginForm>
         <LoginMessage>

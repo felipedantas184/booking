@@ -49,11 +49,13 @@ export const getStaticProps = async (context) => {
 export default function RoomCheckout({ room, roomId }) {
   const { user } = useAuth()
 	const [userName, setUserName] = useState()
+  const [userSurname, setUserSurname] = useState()
 
 	useEffect(() => {
 		async function getUserName() {
 			const result = await getDoc(doc(fireDB, 'users', user.uid))
 			setUserName(result.data().name)
+      setUserSurname(result.data().surname)
 		}
 
 		getUserName()
@@ -66,7 +68,7 @@ export default function RoomCheckout({ room, roomId }) {
       <title>Página Individual</title>
     </Head>
     <Layout>
-      <Checkout room={room} roomId={roomId} userName={userName} /> 
+      <Checkout room={room} roomId={roomId} userName={`${userName} ${userSurname}`}  /> 
     </Layout>
     </>
   )

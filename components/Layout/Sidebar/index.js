@@ -9,35 +9,35 @@ const Sidebar = ({ isOpen, toggle }) => {
         <CloseIcon />
       </Icon>
       <LogoWrapper>
-        <Image src="/LogoCarcara.png" alt='Logo Carcará' width={70} height={70} />
+        <Image src={'/images/adufpi_logo.png'} width={200} height={66} alt='ADUFPI'  />
       </LogoWrapper>
       <SidebarWrapper>
         <SidebarMenu>
           <div></div>
           <li>
 					  <Link href='/working' passHref>
-              <SidebarLink onClick={toggle}>Produtos</SidebarLink>
+              <SidebarLink onClick={toggle}>Quartos</SidebarLink>
             </Link>
           </li>
           <li>
             <Link href='/carteira-digital' passHref>
-              <SidebarLink onClick={toggle}>Carteirinha</SidebarLink>
+              <SidebarLink onClick={toggle}>Minhas Reservas</SidebarLink>
             </Link>
           </li>
           <li>
             <Link href='/vantagens' passHref>
-              <SidebarLink onClick={toggle}>Vantagens</SidebarLink>
+              <SidebarLink onClick={toggle}>Meu Perfil</SidebarLink>
             </Link>
           </li>
           <li>
 					  <Link href='/working' passHref>
-              <SidebarLink onClick={toggle}>Treinos</SidebarLink>
+              <SidebarLink onClick={toggle}>Informações</SidebarLink>
             </Link>
           </li>
         </SidebarMenu>
         <SideBtnWrap onClick={toggle}>
           <Link href="/" passHref>
-            <SidebarRoute>Home</SidebarRoute>
+            <SidebarRoute>Contato</SidebarRoute>
           </Link>
         </SideBtnWrap>
       </SidebarWrapper>

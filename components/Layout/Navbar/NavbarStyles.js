@@ -93,10 +93,10 @@ export const NavbarItem = styled.li`
 
 	&:hover {
   color: #FFF;
-	border-bottom: 2px solid #F45B69
+	border-bottom: 2px solid #EB5757
   }
 	&.active {
-  border-bottom: 3px solid #F45B69
+  border-bottom: 3px solid #EB5757
   }
 `
 export const NavbarLink = styled.div`

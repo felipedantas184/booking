@@ -24,7 +24,7 @@ export const BookingsTitle = styled.h1`
   color: #2d3954;
   font-weight: 600;
   text-transform: capitalize;
-  font-size: 35px;
+  font-size: 32px;
 `
 export const BookingsSubtitle = styled.p`
 	color: #72809d;
@@ -40,13 +40,14 @@ export const BookingsCards = styled.div`
   }
 `
 export const BookingCard = styled.div`
-	box-shadow: 0 0 20px 0 rgb(112 121 138 / 18%);
-  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  border-radius: 8px;
+  background-color: #F6F6F6;
 `
 export const BookingCardImage = styled.div`
 	position: relative;
   width: 100%;
-  height: 200px;
+  height: 250px;
   border-radius: 20px 20px 0 0;
   overflow: hidden;
 `
@@ -62,15 +63,6 @@ export const BookingCardTextCategory = styled.div`
   display: flex;
   justify-content: space-between;
 `
-export const BookingCardTextSpan = styled.span`
-	border-radius: 2px;
-  display: inline-block;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 4px 15px;
-  background: rgba(255, 152, 0, 0.1);
-  color: rgb(255, 152, 0);
-`
 export const BookingCardTitle = styled.h4`
 	font-weight: 500;
   margin-top: 10px;
@@ -83,16 +75,16 @@ export const BookingCardLocation = styled.p`
 //FIM
 
 export const BookingInfo = styled.div`
-  border-radius: 0 0 16px 16px ;
-  border: 1px solid #e4e8f3;
+  margin-bottom: 8px;
 `
 export const BookingTitle = styled.h2`
-  padding: 20px 20px 0 20px;
-  margin-bottom: 24px !important;
+  padding: 16px 20px 0 20px;
+  margin-bottom: 12px !important;
 
   margin-top: 0 !important;
   color: inherit !important;
   font-weight: 600 !important;
+  font-size: 16px;
 `
 export const BookingBox = styled.div`
   display: flex;
@@ -105,11 +97,12 @@ export const BookingLabel = styled.p`
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   font-weight: 600;
+  font-size: 14px;
 `
 export const BookingName = styled.p`
   margin-top: 0 !important;
   margin-bottom: 0 !important;
-  
+  font-size: 14px;
 `
 export const BookingBoxHorizontal = styled.div`
   display: flex;
@@ -119,4 +112,29 @@ export const BookingBoxHorizontal = styled.div`
 export const BookingBoxHorizontalGrid2 = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+`
+
+
+export const RoomCardButtonContainer = styled.div`
+	border-top: 1px solid #cccfd9;
+  padding: 10px 30px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+`
+export const RoomCardButton = styled.button`
+  padding: 8px 16px;
+  text-transform: capitalize;
+  border-radius: 8px;
+  border: 0;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+  font-family: 'Poppins' !important;
+  background-color: #EB5757;
+  cursor: pointer;
+
+  a {
+    color: #fff !important;
+  }
 `

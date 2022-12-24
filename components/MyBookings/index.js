@@ -1,11 +1,10 @@
 import Image from "next/image";
-import { BookingBox, BookingBoxHorizontalGrid2, BookingCard, BookingCardImage, BookingCardLocation, BookingCardText, BookingCardTextCategory, BookingCardTextSpan, BookingCardTitle, BookingInfo, BookingLabel, BookingName, BookingsCards, BookingsContainer, BookingsHeading, BookingsSection, BookingsSubtitle, BookingsTitle, BookingTitle } from "./MyBookingsStyles";
+import { BookingBox, BookingBoxHorizontalGrid2, BookingCard, BookingCardImage, BookingCardLocation, BookingCardText, BookingCardTextCategory, BookingCardTextSpan, BookingCardTitle, BookingInfo, BookingLabel, BookingName, BookingsCards, BookingsContainer, BookingsHeading, BookingsSection, BookingsSubtitle, BookingsTitle, BookingTitle, RoomCardButton, RoomCardButtonContainer } from "./MyBookingsStyles";
 
 import { useAuth } from "../../context/AuthContext";
 
 const MyBookingsPage = ({ bookings, rooms, users }) => {
   const { user } = useAuth()
-
   const myBookings = bookings.filter((booking) => booking.userId == user.uid)
 
   const getRoomName = (roomId) => {
@@ -14,22 +13,19 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
 
     return roomName
   }
-
   const getRoomImage = (roomId) => {
     const room = rooms.filter((room) => room.id == roomId)
     const roomImage = (room[0].imageurl)
 
     return roomImage
   }
-
   const getUserName = (userId) => {
     const user = users.filter((user) => user.id == userId)
     console.log(user)
-    const userName = (user[0].name)
+    const userName = (user[0].name + ' ' +user[0].surname)
 
     return userName
   }
-
   const getUserEmail = (userId) => {
     const user = users.filter((user) => user.id == userId)
     console.log(user)
@@ -54,19 +50,19 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
               </BookingCardImage>
               <BookingCardText>
                 <BookingInfo>
-                  <BookingTitle>{getRoomName(booking.roomId)}</BookingTitle>
+                  <BookingTitle>{getRoomName(booking.roomId)}</BookingTitle>  
                   <BookingBox>
                     <BookingLabel>Nome</BookingLabel>
-                    <BookingName>{getUserEmail(booking.userId)}</BookingName>
-                  </BookingBox>
+                    <BookingName>{getUserName(booking.userId)}</BookingName>
+                  </BookingBox>                
                   <BookingBoxHorizontalGrid2>
                     <BookingBox>
-                      <BookingLabel>Quarto</BookingLabel>
-                      <BookingName>{getUserName(booking.userId)}</BookingName>
+                      <BookingLabel>Email</BookingLabel>
+                      <BookingName>{getUserEmail(booking.userId)}</BookingName>
                     </BookingBox>
                     <BookingBox>
-                      <BookingLabel>Categoria</BookingLabel>
-                      <BookingName>Casal</BookingName>
+                      <BookingLabel>Capacidade</BookingLabel>
+                      <BookingName>4 pessoas</BookingName>
                     </BookingBox>
                   </BookingBoxHorizontalGrid2>
                   <BookingBoxHorizontalGrid2>
@@ -81,6 +77,12 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
                   </BookingBoxHorizontalGrid2>
                 </BookingInfo>
               </BookingCardText>
+
+              <RoomCardButtonContainer>
+                <span style={{ fontWeight: '500', fontSize: 14 }} >{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(booking.amount)}</span>
+
+                <RoomCardButton>Cancelar Reserva</RoomCardButton>
+              </RoomCardButtonContainer>
             </BookingCard>
           ))}
         </BookingsCards>

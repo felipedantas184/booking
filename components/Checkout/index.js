@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from 'next/router'
 import Router from 'next/router'
 
-import { CheckoutBottomContainer, CheckoutBottomContainerOne, CheckoutBottomContainerTwo, CheckoutBox, CheckoutBoxHorizontal, CheckoutBoxHorizontalGrid2, CheckoutBoxHorizontalGrid3, CheckoutButton, CheckoutDescription, CheckoutEnd, CheckoutFeatures, CheckoutImageWrapper, CheckoutInfo, CheckoutLabel, CheckoutName, CheckoutSection, CheckoutTitle, CheckoutTopContainer, CheckoutTopContainerHeading, CheckoutTopContainerMiddle, CheckoutTopContainerPrice, CheckoutTopContainerTitle, CheckoutTopContainerType, CheckoutValue } from "./CheckoutStyles";
+import { CheckoutBottomContainer, CheckoutBottomContainerOne, CheckoutBottomContainerTwo, CheckoutBox, CheckoutBoxHorizontal, CheckoutBoxHorizontalGrid2, CheckoutButton, CheckoutDescription, CheckoutDescriptionTime, CheckoutEnd, CheckoutFeatures, CheckoutImageWrapper, CheckoutInfo, CheckoutLabel, CheckoutName, CheckoutSection, CheckoutTitle, CheckoutTopContainer, CheckoutTopContainerPrice, CheckoutTopContainerTitle, CheckoutValue } from "./CheckoutStyles";
 
 import { collection, addDoc, updateDoc, arrayUnion, doc } from 'firebase/firestore'
 import fireDB from '../../firebase/initFirebase'
@@ -32,7 +32,7 @@ const Checkout = ({ room, roomId, userName }) => {
       })
   
       alert("Reserva feita com sucesso")
-      Router.push({pathname: '/'})
+      Router.push({pathname: '/mybookings'})
     } catch(error) {
       console.log(error)
       alert(error)
@@ -43,11 +43,8 @@ const Checkout = ({ room, roomId, userName }) => {
     <>
       <CheckoutSection>
         <CheckoutTopContainer>
-          <CheckoutTopContainerHeading>
-            <CheckoutTopContainerTitle>{room ? room.title : ''}</CheckoutTopContainerTitle>
-            <CheckoutTopContainerType>Casal</CheckoutTopContainerType>
-          </CheckoutTopContainerHeading>
-          <CheckoutTopContainerPrice>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room ? room.price : 0)}</CheckoutTopContainerPrice>
+          <CheckoutTopContainerTitle>{room ? room.title : ''}</CheckoutTopContainerTitle>
+          <CheckoutTopContainerPrice>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room ? room.price : 0)}/diária</CheckoutTopContainerPrice>
         </CheckoutTopContainer>
 
         <CheckoutBottomContainer>
@@ -57,7 +54,6 @@ const Checkout = ({ room, roomId, userName }) => {
             </CheckoutImageWrapper>
             <CheckoutFeatures>
             </CheckoutFeatures>
-            <CheckoutDescription>{room ? room.resume : ''}</CheckoutDescription>
           </CheckoutBottomContainerOne>
 
           <CheckoutBottomContainerTwo>
@@ -77,8 +73,8 @@ const Checkout = ({ room, roomId, userName }) => {
                   <CheckoutName>{room ? room.title : ''}</CheckoutName>
                 </CheckoutBox>
                 <CheckoutBox>
-                  <CheckoutLabel>Categoria</CheckoutLabel>
-                  <CheckoutName>Casal</CheckoutName>
+                  <CheckoutLabel>Capacidade</CheckoutLabel>
+                  <CheckoutName>4 pessoas</CheckoutName>
                 </CheckoutBox>
               </CheckoutBoxHorizontalGrid2>
               <CheckoutBoxHorizontalGrid2>
@@ -93,13 +89,22 @@ const Checkout = ({ room, roomId, userName }) => {
               </CheckoutBoxHorizontalGrid2>
             </CheckoutInfo>
             <CheckoutEnd>
-              <p style={{textAlign:'right', marginBottom: 0}}>{totaldays} diárias</p>
+              <p style={{textAlign:'right', marginBottom: 0, fontSize: 14, color: '#13131A'}}>{totaldays} diárias</p>
               <CheckoutBoxHorizontal>
-                <CheckoutLabel>Valor Total:</CheckoutLabel>
+                <CheckoutLabel style={{fontSize: 16}} >Valor Total:</CheckoutLabel>
                 <CheckoutValue>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room ? room.price*totaldays : 0)}</CheckoutValue>
               </CheckoutBoxHorizontal>
-              <CheckoutButton onClick={() => adddata()}>Reservar Agora</CheckoutButton>
+              <CheckoutButton onClick={() => adddata()}>Confirmar Reserva</CheckoutButton>
             </CheckoutEnd>
+          </CheckoutBottomContainerTwo>
+        </CheckoutBottomContainer>
+
+        <CheckoutBottomContainer style={{marginTop: 8}} >
+          <CheckoutBottomContainerOne>
+            <CheckoutDescription>{room ? room.resume : ''}</CheckoutDescription>
+          </CheckoutBottomContainerOne>
+          <CheckoutBottomContainerTwo style={{height: 'auto'}}>
+            <CheckoutDescriptionTime style={{textAlign: 'center'}}>As diárias têm início às 14h e checkout às 12h.</CheckoutDescriptionTime>
           </CheckoutBottomContainerTwo>
         </CheckoutBottomContainer>
       </CheckoutSection>

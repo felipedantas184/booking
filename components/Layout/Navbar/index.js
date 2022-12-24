@@ -63,7 +63,7 @@ const Navbar = ({ toggle, userName }) => {
 				)
 				}
 				<MobileIcon onClick={toggle}>
-					<FaBars color="#D47734" />
+					<FaBars color="#EB5757" />
 				</MobileIcon>
 			</NavbarWrapper>
 		</NavbarContainer>

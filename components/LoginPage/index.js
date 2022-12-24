@@ -1,9 +1,10 @@
-import { ButtonWrap, FormButton, FormHeading, FormSpan, FormSubtitle, FormTitle, Input, InputWrap, LoginContainer, LoginForm, LoginMessage, LoginSection, MessageSubtitle, MessageTitle } from "./LoginStyles";
+import { ButtonWrap, FormButton, FormHeading, FormSpan, FormSubtitle, FormTitle, Input, InputGroup, InputLabel, InputWrap, LoginContainer, LoginForm, LoginMessage, LoginSection, MessageSubtitle, MessageTitle } from "./LoginStyles";
 
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { useAuth } from "../../context/AuthContext"
 import Link from "next/link";
+import Image from "next/image";
 
 const LoginPage = () => {
   const router = useRouter()
@@ -33,20 +34,26 @@ const LoginPage = () => {
       <LoginContainer>
         <LoginForm onSubmit={handleLogin}>
           <FormHeading>
-            <FormTitle>ADUFPI</FormTitle>
-            <FormSubtitle>Entre com sua conta</FormSubtitle>
+            <Image src={'/images/adufpi_logo.png'} width={200} height={66} alt='ADUFPI'  />
+            <FormSubtitle>Login</FormSubtitle>
           </FormHeading>
           <InputWrap>
-            <Input type={'email'} placeholder="E-mail" required 
-              onChange={(e) =>
-                setData({
-                  ...data,
-                  email: e.target.value,
-                })
-              }
-              value={data.email}
-            />
-            <Input type={'password'} placeholder="Senha" required 
+            <InputGroup>
+              <InputLabel>E-mail</InputLabel>
+              <Input type={'email'} placeholder="Digite seu e-mail" required 
+                onChange={(e) =>
+                  setData({
+                    ...data,
+                    email: e.target.value,
+                  })
+                }
+                value={data.email}
+              />
+            </InputGroup>
+            
+            <InputGroup>
+              <InputLabel>Senha</InputLabel>
+              <Input type={'password'} placeholder="Digite sua senha" required 
               onChange={(e) =>
                 setData({
                   ...data,
@@ -54,11 +61,12 @@ const LoginPage = () => {
                 })
               }
               value={data.password}
-            />
+              />
+            </InputGroup>
           </InputWrap>
           <ButtonWrap>
             <FormButton type="submit" >Entrar</FormButton>
-            <FormSpan>Ainda não possui uma conta? <Link href={'/signup'} >Cadastre-se</Link></FormSpan>
+            <FormSpan>Não possui uma conta? <Link href={'/signup'}>Cadastre-se</Link></FormSpan>
           </ButtonWrap>
         </LoginForm>
         <LoginMessage>

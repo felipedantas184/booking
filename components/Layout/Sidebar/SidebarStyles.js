@@ -6,8 +6,7 @@ export const SidebarContainer = styled.aside`
   z-index: 999;
   width: 100%;
   height: 100%;
-  background: #051937;
-  background-color: linear-gradient(to right bottom, #051937, #023047);
+  background: #F1F1F1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,11 +17,11 @@ export const SidebarContainer = styled.aside`
   opacity: ${({ isOpen }) => (isOpen ? '100%' : '0')};
   right: ${({ isOpen }) => (isOpen ? '0' : '100%')};
 
-  font-family: 'Graduate';
+  font-family: 'Poppins';
 `
 
 export const CloseIcon = styled(FaTimes)`
-  color: #fff;
+  color: #13131A;
 `
 export const Icon = styled.div`
   position: absolute;
@@ -63,19 +62,20 @@ export const SidebarLink = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 20px;
+  font-weight: 500;
   text-decoration: none;
   list-style: none;
   transition: 0.2s ease-in-out;
   text-decoration: none;
-  color: #fff;
+  color: #13131A;
   cursor: pointer;
 
   -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
   user-select: none;
 
   &:hover {
-    color: #D2593C;
+    color: #EB5757;
     transition: 0.2s ease-in-out;
   }
 `
@@ -94,7 +94,7 @@ export const SidebarExternalLink = styled.a`
   user-select: none;
 
   &:hover {
-    color: #D2593C;
+    color: #EB5757;
     transition: 0.2s ease-in-out;
   }
 `
@@ -102,21 +102,31 @@ export const SideBtnWrap = styled.div`
   display: flex;
   justify-content: center;
 `
-export const SidebarRoute = styled.p`
-  background: #D2593C;
-  white-space: nowrap;
-  padding: 16px 64px;
-  color: #FFF;
+export const SidebarRoute = styled.div`
+  width: 200px;
+  padding: 4px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   font-size: 24px;
-  outline:  none;
-  border: none;
-  border-radius: 16px;
+  text-transform: capitalize;
+  border-radius: 8px;
+  border: 0;
+  font-weight: 500;
+  color: #fff;
+  font-family: 'Poppins' !important;
+  background-color: #EB5757;
   cursor: pointer;
+
+  a {
+    color: #fff !important;
+  }
+
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
-  box-shadow: rgba(0, 0, 0, 0.5) 0px 13px 27px -5px, rgba(0, 0, 0, 0.9) 0px 8px 16px -8px;	
 
   &:hover {
     transition: all 0.2s ease-in-out;
