@@ -3,6 +3,7 @@ import { FaEnvelope, FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react
 import { FooterContainer, FooterWrap, SocialIconLink, SocialIcons, SocialLogo, SocialMedia, SocialMediaWrap, WebsiteRights, ExtLink } from './FooterStyles'
 import { animateScroll as scroll } from 'react-scroll';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Footer = () => {
   const toggleHome = () => {
@@ -16,24 +17,24 @@ const Footer = () => {
           <SocialMediaWrap>
             <Link href='/' passHref>
 							<SocialLogo onClick={toggleHome}>
-								BookingApp
+                <Image src={'/images/adufpi_logo.png'} alt="ADUFPI" layout='fill' />
 							</SocialLogo>
             </Link>
-            <WebsiteRights>BookingApp © {new Date().getFullYear()} Criado por Felipe Dantas.</WebsiteRights>
+            <WebsiteRights>ADUFPI © {new Date().getFullYear()} Criado por Tecdata.</WebsiteRights>
             <SocialIcons>
-              <SocialIconLink rel="noreferrer" href='https://www.instagram.com/aaacarcara/' target='_blank' arial-label='Facebook'>
+              <SocialIconLink rel="noreferrer" href='https://pt-br.facebook.com/adufpi/' target='_blank' arial-label='Facebook'>
                 <FaFacebook />
               </SocialIconLink>
-              <SocialIconLink rel="noreferrer" href='https://www.instagram.com/aaacarcara/' target='_blank' arial-label='Instagram'>
+              <SocialIconLink rel="noreferrer" href='https://www.instagram.com/adufpi/' target='_blank' arial-label='Instagram'>
                 <FaInstagram/>
               </SocialIconLink>
-              <SocialIconLink rel="noreferrer" href="mailto:atleticamedufpi@gmail.com" target='_blank' arial-label='Email'>
+              <SocialIconLink rel="noreferrer" href="mailto:secretaria@adufpi.org.br" target='_blank' arial-label='Email'>
                 <FaEnvelope />
               </SocialIconLink>
-              <SocialIconLink rel="noreferrer" href='https://www.instagram.com/aaacarcara/' target='_blank' arial-label='Twitter'>
+              <SocialIconLink rel="noreferrer" href='https://twitter.com/adufpi' target='_blank' arial-label='Twitter'>
                 <FaTwitter/>
               </SocialIconLink>
-              <SocialIconLink rel="noreferrer" href='https://www.youtube.com/channel/UCJ58jGeYDkfiuIhejZUFKVA' target='_blank' arial-label='Youtube'>
+              <SocialIconLink rel="noreferrer" href='https://www.youtube.com/channel/UCJDrKt4jf1SZ10x_kkyqU8A' target='_blank' arial-label='Youtube'>
                 <FaYoutube />
               </SocialIconLink>
             </SocialIcons>

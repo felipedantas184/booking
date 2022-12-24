@@ -25,10 +25,12 @@ const Checkout = ({ room, roomId, userName }) => {
         to: todate,
         roomId: roomId,
         bookingdate: moment().utcOffset('-03:00').format('DD-MM-YYYY hh:mm:ss a'),
-      })
-
-      await updateDoc(doc(fireDB, "rooms", roomId), {
-        currentBookings: arrayUnion({fromdate: fromdate, todate: todate})
+        amount: room.price*totaldays,
+      }).then(function(docRef) {
+        updateDoc(doc(fireDB, "rooms", roomId), {
+          currentBookings: arrayUnion({fromdate: fromdate, todate: todate, bookingId: docRef.id})
+        })
+        console.log("Document written with ID: ", docRef.id)
       })
   
       alert("Reserva feita com sucesso")

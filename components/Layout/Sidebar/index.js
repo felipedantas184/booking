@@ -1,8 +1,13 @@
 import { SidebarContainer, Icon, CloseIcon, SidebarWrapper, SidebarMenu, SidebarLink, SidebarRoute, SideBtnWrap, ExtLink, LogoWrapper, SidebarExternalLink } from './SidebarStyles'
 import Image from 'next/image';
 import Link from "next/link";
+import { useAuth } from '../../../context/AuthContext';
+import { useRouter } from 'next/router';
 
 const Sidebar = ({ isOpen, toggle }) => {
+  const { logout } = useAuth()
+	const router = useRouter()
+
   return (
     <SidebarContainer isOpen={isOpen}>
       <Icon onClick={toggle}>
@@ -31,14 +36,15 @@ const Sidebar = ({ isOpen, toggle }) => {
           </li>
           <li>
 					  <Link href='/working' passHref>
-              <SidebarLink onClick={toggle}>Informações</SidebarLink>
+              <SidebarLink onClick={toggle}>Contato</SidebarLink>
             </Link>
           </li>
         </SidebarMenu>
         <SideBtnWrap onClick={toggle}>
-          <Link href="/" passHref>
-            <SidebarRoute>Contato</SidebarRoute>
-          </Link>
+         <SidebarRoute onClick={() => {
+          logout()
+          router.push('/login')
+         }} >Logout</SidebarRoute>
         </SideBtnWrap>
       </SidebarWrapper>
     </SidebarContainer>

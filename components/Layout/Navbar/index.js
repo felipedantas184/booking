@@ -1,59 +1,52 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { useEffect, useState } from 'react';
-import { FaArrowAltCircleRight, FaBars, FaBook, FaSignOutAlt, FaUser } from 'react-icons/fa';
-import { MobileIcon, NavbarContainer, NavbarItem, NavbarLink, NavbarLogo, NavbarLogout, NavbarMenu, NavbarWrapper } from "./NavbarStyles";
+import { FaBars, FaBook, FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { MobileIcon, NavbarBottom, NavbarContainer, NavbarItem, NavbarLink, NavbarLogo, NavbarLogout, NavbarMenu, NavbarWrapper } from "./NavbarStyles";
 import { animateScroll as scroll } from 'react-scroll';
 import { useAuth } from '../../../context/AuthContext';
 import { useRouter } from 'next/router';
 
 const Navbar = ({ toggle, userName }) => {
-	const [scrollNav, setScrollNav] = useState(false)
-	const changeNav = () => {
-		if (window.scrollY >= 60) {
-			setScrollNav(true)
-		} else {
-			setScrollNav(false)
-		}
-	}
-
-	useEffect(() => {
-		window.addEventListener('scroll', changeNav)
-	}, [])
-
 	const toggleHome = () => {
 		scroll.scrollToTop();
 	}
-
 
 	const { user, logout } = useAuth()
 	const router = useRouter()
 
 	return (
-		<NavbarContainer scrollNav={scrollNav}>
+		<NavbarContainer>
 			<NavbarWrapper>
 				<Link href="/" passHref>
-					<NavbarLogo onClick={toggleHome}>ADUFPI</NavbarLogo>
+					<NavbarLogo onClick={toggleHome}>
+						<Image src={'/images/adufpi_logo.png'} alt="ADUFPI" layout='fill' />
+					</NavbarLogo>
 				</Link>
 				{user ? (
 					<NavbarMenu>
-						<NavbarItem>
-							<FaBook />
-							<NavbarLink>
-								<Link href={'/mybookings'} >Minhas Reservas</Link>
-							</NavbarLink>
-						</NavbarItem>
-						<NavbarItem>
-							<FaUser />
-							<NavbarLink>{userName}</NavbarLink>
-						</NavbarItem>
-						<NavbarItem onClick={() => {
-							logout() 
-							router.push('/login')
-						}} >
-							<FaSignOutAlt />
-							<NavbarLink>Logout</NavbarLink>
-						</NavbarItem>
+						<NavbarBottom>
+							<NavbarItem>
+								<FaBook />
+								<NavbarLink>
+									<Link href={'/mybookings'} >Minhas Reservas</Link>
+								</NavbarLink>
+							</NavbarItem>
+						</NavbarBottom>
+						<NavbarBottom>
+							<NavbarItem>
+								<FaUser />
+								<NavbarLink>{userName}</NavbarLink>
+							</NavbarItem>
+						</NavbarBottom>
+						<NavbarBottom>
+							<NavbarItem onClick={() => {
+								logout()
+								router.push('/login')
+							}} >
+								<FaSignOutAlt />
+								<NavbarLink>Logout</NavbarLink>
+							</NavbarItem>
+						</NavbarBottom>
 					</NavbarMenu>
 				) : (
 					<>

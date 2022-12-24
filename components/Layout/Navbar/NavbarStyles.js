@@ -1,10 +1,9 @@
 import styled from "styled-components"; 
 
 export const NavbarContainer = styled.nav`
-  background: ${({scrollNav}) => (scrollNav ? '#13131A' : '#13131A')};
-	color: #F0EDEE;
+  background: #F1F1F1;
+	color: #13131A;
 	font-family: 'Kdam Thmor Pro';
-	position: sticky;
   top: 0;
 	z-index:10;
 	transition: all 0.5s ease-in-out;
@@ -21,7 +20,10 @@ export const NavbarWrapper = styled.div`
 	align-items: center;
 `
 export const NavbarLogo = styled.a`
-	text-decoration: none;
+  position: relative;
+  width: 100px;
+  height: 32px;
+  text-decoration: none;
 	color: #FFF;
 	font-size: 26px;
   cursor: pointer;
@@ -87,16 +89,24 @@ export const NavbarItem = styled.li`
   align-items: center;
 	padding: 0 1rem;
   gap: 8px;
+  font-size: 14px;
   
   cursor: pointer;
 	transition: all 0.2s ease-in-out;
+`
+export const NavbarBottom = styled.div`
+	transition: all 0.2s ease-in-out;
 
-	&:hover {
-  color: #FFF;
-	border-bottom: 2px solid #EB5757
+  &::after {
+    display:block;
+    content: '';
+    border-bottom: solid 2px #EB5757;  
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
   }
-	&.active {
-  border-bottom: 3px solid #EB5757
+
+  &:hover::after {
+    transform: scaleX(1);
   }
 `
 export const NavbarLink = styled.div`
@@ -129,7 +139,7 @@ export const NavbarBtnLink = styled.p`
   background: transparent;
 	border: 2px solid #F0EDEE;
 	color: #F0EDEE;
-  font-size: 16px;
+  font-size: 14px;
 	font-weight: 500;
 
 	border-radius: 10px;

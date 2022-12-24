@@ -92,6 +92,12 @@ export const BookingBox = styled.div`
 
   padding: 0 20px 0 20px;
   margin-bottom: 16px;
+
+  @media screen and (max-width: 800px) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `
 export const BookingLabel = styled.p`
   margin-top: 0 !important;
@@ -103,6 +109,12 @@ export const BookingName = styled.p`
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   font-size: 14px;
+
+  @media screen and (max-width: 800px) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `
 export const BookingBoxHorizontal = styled.div`
   display: flex;

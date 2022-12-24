@@ -59,9 +59,6 @@ export const SidebarMenu = styled.ul`
   }
 `
 export const SidebarLink = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 20px;
   font-weight: 500;
   text-decoration: none;
@@ -77,6 +74,18 @@ export const SidebarLink = styled.div`
   &:hover {
     color: #EB5757;
     transition: 0.2s ease-in-out;
+  }
+
+  &::after {
+    display:block;
+    content: '';
+    border-bottom: solid 2px #EB5757;  
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
   }
 `
 export const SidebarExternalLink = styled.a`
@@ -123,15 +132,14 @@ export const SidebarRoute = styled.div`
     color: #fff !important;
   }
 
-  transition: all 0.2s ease-in-out;
+  transition: all 1s ease-in-out;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 
   &:hover {
-    transition: all 0.2s ease-in-out;
-    background: #D4D4D4;
-    color: #010606;
+    transition: all 1s ease-in-out;
+    background: #EB3A3A;
 	  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   }
 `
