@@ -20,17 +20,17 @@ const Sidebar = ({ isOpen, toggle }) => {
         <SidebarMenu>
           <div></div>
           <li>
-					  <Link href='/working' passHref>
+					  <Link href='/' passHref>
               <SidebarLink onClick={toggle}>Quartos</SidebarLink>
             </Link>
           </li>
           <li>
-            <Link href='/carteira-digital' passHref>
+            <Link href='/mybookings' passHref>
               <SidebarLink onClick={toggle}>Minhas Reservas</SidebarLink>
             </Link>
           </li>
           <li>
-            <Link href='/vantagens' passHref>
+            <Link href='/working' passHref>
               <SidebarLink onClick={toggle}>Meu Perfil</SidebarLink>
             </Link>
           </li>

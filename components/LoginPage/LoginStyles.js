@@ -127,6 +127,12 @@ export const FormButton = styled.button`
   font-family: 'Poppins' !important;
 
   background-color: #EB5757;
+  transition: 0.5s;
+  cursor: pointer;
+
+  &:hover, &:focus {
+    box-shadow: inset 200px 0 0 0 #13131A;
+  }
 `
 export const FormSpan = styled.span`
   font-size: 14px;

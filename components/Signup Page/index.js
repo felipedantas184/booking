@@ -20,10 +20,13 @@ const SignupPage = () => {
     cpf: ''
   })
 
+  const [loading, setLoading] = useState(false)
+
   const handleSignup = async (e) => {
     e.preventDefault()
 
     try {
+      setLoading(true)
       await signup(data.email, data.password).then(auth => {
         return setDoc(doc(fireDB, "users", auth.user.uid), {
           name: data.name,
@@ -35,6 +38,7 @@ const SignupPage = () => {
       })
       router.push('/')
     } catch (err) {
+      setLoading(false)
       console.log(err)
       alert(err)
     }
@@ -130,7 +134,13 @@ const SignupPage = () => {
             </InputGroup>
           </InputWrap>
           <ButtonWrap>
-            <FormButton type="submit" >Entrar</FormButton>
+            <FormButton type="submit" >
+              {!loading ? (
+                'Entrar'
+              ) :
+                'Entrando...'
+              }
+              </FormButton>
             <FormSpan>Já possui uma conta? <Link href={'/login'}>Entre</Link></FormSpan>
           </ButtonWrap>
         </LoginForm>

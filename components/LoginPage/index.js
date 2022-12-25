@@ -14,14 +14,18 @@ const LoginPage = () => {
     password: '',
   })
 
+  const [loading, setLoading] = useState(false)
+
   const handleLogin = async (e) => {
     e.preventDefault()
     
     console.log(user)
     try {
+      setLoading(true)
       await login(data.email, data.password)
       router.push('/')
     } catch (err) {
+      setLoading(false)
       console.log(err)
       alert('Email ou senha incorretos!')
     }
@@ -65,7 +69,13 @@ const LoginPage = () => {
             </InputGroup>
           </InputWrap>
           <ButtonWrap>
-            <FormButton type="submit" >Entrar</FormButton>
+            <FormButton type="submit">
+              {!loading ? (
+                'Entrar'
+              ) :
+                'Entrando...'
+              }
+              </FormButton>
             <FormSpan>Não possui uma conta? <Link href={'/signup'}>Cadastre-se</Link></FormSpan>
           </ButtonWrap>
         </LoginForm>

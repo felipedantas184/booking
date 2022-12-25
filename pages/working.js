@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { WorkingOnIt } from '../styles/pages/working'
 import Layout from '../components/Layout/Layout'
+import Image from 'next/image'
 
 const Working = () => {
   const router = useRouter()
@@ -10,15 +11,16 @@ const Working = () => {
   useEffect(() => {
     setTimeout(() => {
       router.push('/')
-    }, 4000)
-  }, [])
+    }, 10000)
+  }, [router])
 
   return (
     <Layout>
       <WorkingOnIt>
-        <h1>Estamos Trabalhando Nisso!</h1>
-        <h2>Falta pouco para você desfrutar dessa funcionalidade:(</h2>
-        <p>Redirecionando para <Link href="/"><a className="BackLink">Homepage</a></Link> em alguns segundos ;)...</p>
+        <Image src={'/images/working.svg'} alt="Estamos trabalhando" width={245} height={160} />
+        <h1>Estamos Trabalhando!</h1>
+        <h2>Falta pouco para você desfrutar desta funcionalidade ;-)</h2>
+        <p>Redirecionando para em alguns segundos...</p>
       </WorkingOnIt>
     </Layout>
   );

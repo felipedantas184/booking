@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const BookingsSection = styled.section`
 	padding: 40px 0;
+  min-height: 70vh;
 `
 export const BookingsContainer = styled.div`
 	max-width: 1024px;
@@ -37,6 +38,7 @@ export const BookingsCards = styled.div`
 
   @media screen and (max-width: 800px) {
     grid-template-columns: repeat(1, 1fr);
+    margin-top: 32px;
   }
 `
 export const BookingCard = styled.div`
@@ -145,8 +147,37 @@ export const RoomCardButton = styled.button`
   font-family: 'Poppins' !important;
   background-color: #EB5757;
   cursor: pointer;
+  transition: 0.5s;
+  
+  &:hover, &:focus {
+    box-shadow: inset 200px 0 0 0 #13131A;
+  }
 
   a {
     color: #fff !important;
+  }
+`
+
+export const EmptyDiv = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px;
+`
+export const ImageWrapper = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+
+  width: 431px;
+  height: 320px;
+
+  @media screen and (max-width: 720px) {
+    width: 215px;
+    height: 160px;
   }
 `

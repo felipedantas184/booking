@@ -183,6 +183,11 @@ export const CheckoutButton = styled.button`
   font-family: 'Poppins' !important;
   background-color: #EB5757;
   cursor: pointer;
+  transition: 0.5s;
+
+  &:hover, &:focus {
+    box-shadow: inset 400px 0 0 0 #13131A;
+  }
 
   a {
     color: #fff !important;

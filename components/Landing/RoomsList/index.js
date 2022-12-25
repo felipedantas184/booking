@@ -5,6 +5,8 @@ import Router from 'next/router'
 import { DatePicker } from 'antd'
 import 'antd/dist/antd.css'
 
+import { FiUsers } from 'react-icons/fi'
+
 import moment from 'moment';
 const { RangePicker } = DatePicker;
 import locale from 'antd/lib/date-picker/locale/pt_BR';
@@ -44,6 +46,7 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
               <RoomCardText>
                 <RoomCardTextCategory>
                   <RoomCardTextSpan>Diária: {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.price)}</RoomCardTextSpan>
+                  <RoomCardTextSpan>4 <FiUsers size={14} color={'#EB5757'}/></RoomCardTextSpan>
                 </RoomCardTextCategory>
                 <RoomCardTitle>{room.title}</RoomCardTitle>
                 <RoomCardLocation>{room.resume}</RoomCardLocation>

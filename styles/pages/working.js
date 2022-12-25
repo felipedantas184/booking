@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 
 export const WorkingOnIt = styled.div`
-  margin-top: -60px;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   padding: 0 16px;
   box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
@@ -11,24 +10,23 @@ export const WorkingOnIt = styled.div`
   align-items: center;
   text-align: center;
   flex-direction: column;
-  font-family: "Graduate";
+  font-family: "Poppins", sans-serif;
 
-  background: #051937;
-  background-color: linear-gradient(to right bottom, #051937, #023047);
-  margin-top: -60px;
+  background: #13131A;
 
   h1 {
     font-size: 24px;
+    margin-top: 32px;
     margin-bottom: 32px;
     color: #FFF;
   }
   h2 {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 16px;
     color: #E1E1E1;
   }
   p{
-    font-size: 16px;
+    font-size: 14px;
     color: #D4D4D4;
   }
   .BackLink {

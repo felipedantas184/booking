@@ -64,6 +64,12 @@ export const RoomCardTextSpan = styled.span`
   padding: 4px 15px;
   background: rgba(235, 87, 87, 0.1);
   color: #EB5757;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px
 `
 export const RoomCardTitle = styled.h4`
 	font-weight: 500;
@@ -92,6 +98,11 @@ export const RoomCardButton = styled.button`
   font-family: 'Poppins' !important;
   background-color: #EB5757;
   cursor: pointer;
+  transition: 0.5s;
+  
+  &:hover, &:focus {
+    box-shadow: inset 200px 0 0 0 #13131A;
+  }
 
   a {
     color: #fff !important;

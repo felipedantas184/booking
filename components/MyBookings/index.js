@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BookingBox, BookingBoxHorizontalGrid2, BookingCard, BookingCardImage, BookingCardLocation, BookingCardText, BookingCardTextCategory, BookingCardTextSpan, BookingCardTitle, BookingInfo, BookingLabel, BookingName, BookingsCards, BookingsContainer, BookingsHeading, BookingsSection, BookingsSubtitle, BookingsTitle, BookingTitle, RoomCardButton, RoomCardButtonContainer } from "./MyBookingsStyles";
+import { BookingBox, BookingBoxHorizontalGrid2, BookingCard, BookingCardImage, BookingCardLocation, BookingCardText, BookingCardTextCategory, BookingCardTextSpan, BookingCardTitle, BookingInfo, BookingLabel, BookingName, BookingsCards, BookingsContainer, BookingsHeading, BookingsSection, BookingsSubtitle, BookingsTitle, BookingTitle, EmptyDiv, ImageWrapper, RoomCardButton, RoomCardButtonContainer } from "./MyBookingsStyles";
 
 import { useAuth } from "../../context/AuthContext";
 import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
@@ -24,7 +24,7 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
   const getUserName = (userId) => {
     const user = users.filter((user) => user.id == userId)
     console.log(user)
-    const userName = (user[0].name + ' ' +user[0].surname)
+    const userName = (user[0].name + ' ' + user[0].surname)
 
     return userName
   }
@@ -37,7 +37,7 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
   }
 
   async function deleteData(bookingId, roomId, bookingFrom, bookingTo) {
-    try{
+    try {
       if (confirm("Você tem certeza de que deseja cancelar esta reserva?" + roomId) == true) {
         await deleteDoc(doc(fireDB, "bookings", bookingId)).then(
           updateDoc(doc(fireDB, "rooms", roomId), {
@@ -49,9 +49,9 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
           })
         )
         alert("Reserva cancelada!")
-        location.reload()  
+        location.reload()
       }
-    } catch(error) {
+    } catch (error) {
       console.log(error)
       alert(error)
     }
@@ -65,50 +65,59 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
           <BookingsTitle>Minhas Reservas</BookingsTitle>
           <BookingsSubtitle>Confira aqui suas reservas.</BookingsSubtitle>
         </BookingsHeading>
-        <BookingsCards>
-          {myBookings.map((booking) => (
-            <BookingCard key={booking.id}>
-              <BookingCardImage>
-                <Image src={'https:' + getRoomImage(booking.roomId)} alt={getRoomName(booking.roomId)} layout='fill' />
-              </BookingCardImage>
-              <BookingCardText>
-                <BookingInfo>
-                  <BookingTitle>{getRoomName(booking.roomId)}</BookingTitle>  
-                  <BookingBox>
-                    <BookingLabel>Nome</BookingLabel>
-                    <BookingName>{getUserName(booking.userId)}</BookingName>
-                  </BookingBox>                
-                  <BookingBoxHorizontalGrid2>
+        {myBookings.length > 0 ? (
+          <BookingsCards>
+            {myBookings.map((booking) => (
+              <BookingCard key={booking.id}>
+                <BookingCardImage>
+                  <Image src={'https:' + getRoomImage(booking.roomId)} alt={getRoomName(booking.roomId)} layout='fill' />
+                </BookingCardImage>
+                <BookingCardText>
+                  <BookingInfo>
+                    <BookingTitle>{getRoomName(booking.roomId)}</BookingTitle>
                     <BookingBox>
-                      <BookingLabel>Email</BookingLabel>
-                      <BookingName>{getUserEmail(booking.userId)}</BookingName>
+                      <BookingLabel>Nome</BookingLabel>
+                      <BookingName>{getUserName(booking.userId)}</BookingName>
                     </BookingBox>
-                    <BookingBox>
-                      <BookingLabel>Capacidade</BookingLabel>
-                      <BookingName>4 pessoas</BookingName>
-                    </BookingBox>
-                  </BookingBoxHorizontalGrid2>
-                  <BookingBoxHorizontalGrid2>
-                    <BookingBox>
-                      <BookingLabel>Check-In</BookingLabel>
-                      <BookingName>{booking.from}</BookingName>
-                    </BookingBox>
-                    <BookingBox>
-                      <BookingLabel>Check-Out</BookingLabel>
-                      <BookingName>{booking.to}</BookingName>
-                    </BookingBox>
-                  </BookingBoxHorizontalGrid2>
-                </BookingInfo>
-              </BookingCardText>
+                    <BookingBoxHorizontalGrid2>
+                      <BookingBox>
+                        <BookingLabel>Email</BookingLabel>
+                        <BookingName>{getUserEmail(booking.userId)}</BookingName>
+                      </BookingBox>
+                      <BookingBox>
+                        <BookingLabel>Capacidade</BookingLabel>
+                        <BookingName>4 pessoas</BookingName>
+                      </BookingBox>
+                    </BookingBoxHorizontalGrid2>
+                    <BookingBoxHorizontalGrid2>
+                      <BookingBox>
+                        <BookingLabel>Check-In</BookingLabel>
+                        <BookingName>{booking.from}</BookingName>
+                      </BookingBox>
+                      <BookingBox>
+                        <BookingLabel>Check-Out</BookingLabel>
+                        <BookingName>{booking.to}</BookingName>
+                      </BookingBox>
+                    </BookingBoxHorizontalGrid2>
+                  </BookingInfo>
+                </BookingCardText>
 
-              <RoomCardButtonContainer>
-                <span style={{ fontWeight: '500', fontSize: 14 }} >{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(booking.amount)}</span>
+                <RoomCardButtonContainer>
+                  <span style={{ fontWeight: '500', fontSize: 14 }} >{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(booking.amount)}</span>
 
-                <RoomCardButton onClick={() => deleteData(booking.id, booking.roomId, booking.from, booking.to)} >Cancelar Reserva</RoomCardButton>
-              </RoomCardButtonContainer>
-            </BookingCard>
-          ))}
-        </BookingsCards>
+                  <RoomCardButton onClick={() => deleteData(booking.id, booking.roomId, booking.from, booking.to)} >Cancelar Reserva</RoomCardButton>
+                </RoomCardButtonContainer>
+              </BookingCard>
+            ))}
+          </BookingsCards>
+          ) : (
+            <EmptyDiv>
+              <ImageWrapper>
+                <Image src={'/images/nothingHere.svg'} layout="fill" alt="Nada por aqui" />
+              </ImageWrapper>
+              <BookingCardText>Não encontramos nada por aqui...</BookingCardText>
+            </EmptyDiv>
+          )}
       </BookingsContainer>
     </BookingsSection>
   );
