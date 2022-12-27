@@ -3,7 +3,7 @@ import Landing from '../components/Landing';
 import Layout from '../components/Layout/Layout';
 import fireDB from '../firebase/initFirebase';
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const firebaseRooms = await getDocs(collection(fireDB, "rooms"));
   const rooms = []
   firebaseRooms.forEach((doc) => {
