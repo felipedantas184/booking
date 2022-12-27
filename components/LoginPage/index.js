@@ -19,7 +19,6 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     
-    console.log(user)
     try {
       setLoading(true)
       await login(data.email, data.password)
@@ -29,8 +28,6 @@ const LoginPage = () => {
       console.log(err)
       alert('Email ou senha incorretos!')
     }
-
-    console.log(data)
   }
 
   return (

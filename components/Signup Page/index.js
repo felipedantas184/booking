@@ -39,11 +39,8 @@ const SignupPage = () => {
       router.push('/')
     } catch (err) {
       setLoading(false)
-      console.log(err)
       alert(err)
     }
-
-    console.log(data)
   }
 
   return (

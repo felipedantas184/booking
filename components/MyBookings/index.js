@@ -23,14 +23,12 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
   }
   const getUserName = (userId) => {
     const user = users.filter((user) => user.id == userId)
-    console.log(user)
     const userName = (user[0].name + ' ' + user[0].surname)
 
     return userName
   }
   const getUserEmail = (userId) => {
     const user = users.filter((user) => user.id == userId)
-    console.log(user)
     const userEmail = (user[0].email)
 
     return userEmail
@@ -38,7 +36,7 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
 
   async function deleteData(bookingId, roomId, bookingFrom, bookingTo) {
     try {
-      if (confirm("Você tem certeza de que deseja cancelar esta reserva?" + roomId) == true) {
+      if (confirm("Você tem certeza de que deseja cancelar esta reserva?") == true) {
         await deleteDoc(doc(fireDB, "bookings", bookingId)).then(
           updateDoc(doc(fireDB, "rooms", roomId), {
             currentBookings: arrayRemove({
@@ -52,12 +50,10 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
         location.reload()
       }
     } catch (error) {
-      console.log(error)
       alert(error)
     }
   }
 
-  console.log(myBookings)
   return (
     <BookingsSection>
       <BookingsContainer>

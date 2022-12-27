@@ -81,14 +81,12 @@ const Admin = ({ bookings, rooms, users }) => {
   }
   const getUserName = (userId) => {
     const user = users.filter((user) => user.id == userId)
-    console.log(user)
     const userName = (user[0].name + ' ' + user[0].surname)
 
     return userName
   }
   const getUserEmail = (userId) => {
     const user = users.filter((user) => user.id == userId)
-    console.log(user)
     const userEmail = (user[0].email)
 
     return userEmail
@@ -110,7 +108,6 @@ const Admin = ({ bookings, rooms, users }) => {
         location.reload()
       }
     } catch (error) {
-      console.log(error)
       alert(error)
     }
   }

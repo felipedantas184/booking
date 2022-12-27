@@ -9,6 +9,7 @@ import { collection, addDoc, updateDoc, arrayUnion, doc } from 'firebase/firesto
 import fireDB from '../../firebase/initFirebase'
 
 import { useAuth } from "../../context/AuthContext";
+import { sendContactForm } from "../../lib/api";
 
 const Checkout = ({ room, roomId, userName }) => {
   const router = useRouter();
@@ -30,13 +31,21 @@ const Checkout = ({ room, roomId, userName }) => {
         updateDoc(doc(fireDB, "rooms", roomId), {
           currentBookings: arrayUnion({fromdate: fromdate, todate: todate, bookingId: docRef.id})
         })
-        console.log("Document written with ID: ", docRef.id)
+        sendContactForm({
+          name: userName,
+          email: user.email,
+          subject: 'Reserva Realizada com Sucesso - ADUFPI',
+          from: fromdate,
+          to: todate,
+          room: room.title,
+          amount: Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.price*totaldays),
+          bookingId: docRef.id
+        })
       })
   
       alert("Reserva feita com sucesso")
       Router.push({pathname: '/mybookings'})
     } catch(error) {
-      console.log(error)
       alert(error)
     }
   }
