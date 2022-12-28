@@ -10,6 +10,7 @@ import { DatePicker } from "antd";
 import 'antd/dist/antd.css'
 import locale from 'antd/lib/date-picker/locale/pt_BR';
 import { AdminBookingBox, AdminBookingBoxHorizontalGrid2, AdminBookingCard, AdminBookingCardImage, AdminBookingCardText, AdminBookingInfo, AdminBookingLabel, AdminBookingName, AdminBookingTitle, AdminCards, AdminContainer, AdminHeading, AdminSection, AdminSubtitle, AdminTitle, AdminTotalAmountTitle } from "../components/AdminPage/AdminStyles";
+import Head from "next/head";
 
 export async function getServerSideProps() {
   const firebaseBookings = await getDocs(collection(fireDB, "bookings"));
@@ -55,7 +56,7 @@ export async function getServerSideProps() {
 }
 
 const Admin = ({ bookings, rooms, users }) => {
-  const [selectedMonth, setSelectedMonth] = useState(moment().utcOffset('-03:00').format('DD-MM-YYYY hh:mm:ss a').slice(3,10))
+  const [selectedMonth, setSelectedMonth] = useState(moment().utcOffset('-03:00').format('DD-MM-YYYY hh:mm:ss a').slice(3, 10))
   const disabledDate = (current) => {
     return current && current < moment().endOf("day")
   };
@@ -117,66 +118,86 @@ const Admin = ({ bookings, rooms, users }) => {
   };
 
   return (
-    <Layout>
-      <AdminSection>
-        <AdminContainer>
-          <AdminHeading>
-            <AdminTitle>Checar Reservas</AdminTitle>
-            <AdminSubtitle>Confira aqui as reservas no seu hotel.</AdminSubtitle>
-            <DatePicker picker="month" inputReadOnly={true} format="MM-YYYY" locale={locale} allowClear={false} disabledDate={disabledDate} onChange={onChange}/>
-          </AdminHeading>
-          <div style={{width: '100%', color: '#13131A', marginTop: 24, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-            <AdminTotalAmountTitle>Total a Receber em <br/> {selectedMonth} </AdminTotalAmountTitle>
-            <h3>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(getTotalAmount(selectedMonth))}</h3>
-          </div>
-          <AdminCards>
-            {bookings.filter((item) => item.from.slice(3, 10) == selectedMonth)
-              .map((booking) => (
-                <AdminBookingCard key={booking.id}>
-                  <AdminBookingCardImage>
-                    <Image src={'https:' + getRoomImage(booking.roomId)} alt={getRoomName(booking.roomId)} layout='fill' />
-                  </AdminBookingCardImage>
-                  <AdminBookingCardText>
-                    <AdminBookingInfo>
-                      <AdminBookingTitle>{getRoomName(booking.roomId)}</AdminBookingTitle>
-                      <AdminBookingBox>
-                        <AdminBookingLabel>Nome</AdminBookingLabel>
-                        <AdminBookingName>{getUserName(booking.userId)}</AdminBookingName>
-                      </AdminBookingBox>
-                      <AdminBookingBoxHorizontalGrid2>
-                        <AdminBookingBox>
-                          <AdminBookingLabel>Email</AdminBookingLabel>
-                          <AdminBookingName>{getUserEmail(booking.userId)}</AdminBookingName>
-                        </AdminBookingBox>
-                        <AdminBookingBox>
-                          <AdminBookingLabel>Capacidade</AdminBookingLabel>
-                          <AdminBookingName>4 pessoas</AdminBookingName>
-                        </AdminBookingBox>
-                      </AdminBookingBoxHorizontalGrid2>
-                      <AdminBookingBoxHorizontalGrid2>
-                        <AdminBookingBox>
-                          <AdminBookingLabel>Check-In</AdminBookingLabel>
-                          <AdminBookingName>{booking.from}</AdminBookingName>
-                        </AdminBookingBox>
-                        <AdminBookingBox>
-                          <AdminBookingLabel>Check-Out</AdminBookingLabel>
-                          <AdminBookingName>{booking.to}</AdminBookingName>
-                        </AdminBookingBox>
-                      </AdminBookingBoxHorizontalGrid2>
-                    </AdminBookingInfo>
-                  </AdminBookingCardText>
+    <>
+      <Head>
+        <title>Administração | ADUFPI Reservas</title>
+        <meta name="description" content="Confira todas as reservas feitas por você!" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <meta name="robots" content="noindex"/>
 
-                  <RoomCardButtonContainer>
-                    <span style={{ fontWeight: '500', fontSize: 14 }} >{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(booking.amount)}</span>
+        <meta property="og:title" content="Administração | ADUFPI Reservas"/>
+        <meta property="og:type" content="school"/>
+        <meta property="og:description" content="Confira todas as reservas feitas por você!"/>
+        <meta property="og:image" content="/apple-touch-icon.png"/>
+        <meta property="og:site_name" content="Administração | ADUFPI Reservas"/>
 
-                    <RoomCardButton onClick={() => deleteData(booking.id, booking.roomId, booking.from, booking.to)} >Cancelar Reserva</RoomCardButton>
-                  </RoomCardButtonContainer>
-                </AdminBookingCard>
-              ))}
-          </AdminCards>
-        </AdminContainer>
-      </AdminSection>
-    </Layout>
+        <meta property="twitter:title" content="Administração | ADUFPI Reservas"/>
+        <meta property="twitter:url" content="https://carcara.vercel.app/"/>
+        <meta property="twitter:description" content="Confira todas as reservas feitas por você!"/>
+        <meta property="twitter:image" content="/apple-touch-icon.png"/>
+      </Head>
+
+      <Layout>
+        <AdminSection>
+          <AdminContainer>
+            <AdminHeading>
+              <AdminTitle>Checar Reservas</AdminTitle>
+              <AdminSubtitle>Confira aqui as reservas no seu hotel.</AdminSubtitle>
+              <DatePicker picker="month" inputReadOnly={true} format="MM-YYYY" locale={locale} allowClear={false} disabledDate={disabledDate} onChange={onChange} />
+            </AdminHeading>
+            <div style={{ width: '100%', color: '#13131A', marginTop: 24, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+              <AdminTotalAmountTitle>Total a Receber em <br /> {selectedMonth} </AdminTotalAmountTitle>
+              <h3>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(getTotalAmount(selectedMonth))}</h3>
+            </div>
+            <AdminCards>
+              {bookings.filter((item) => item.from.slice(3, 10) == selectedMonth)
+                .map((booking) => (
+                  <AdminBookingCard key={booking.id}>
+                    <AdminBookingCardImage>
+                      <Image src={'https:' + getRoomImage(booking.roomId)} alt={getRoomName(booking.roomId)} layout='fill' />
+                    </AdminBookingCardImage>
+                    <AdminBookingCardText>
+                      <AdminBookingInfo>
+                        <AdminBookingTitle>{getRoomName(booking.roomId)}</AdminBookingTitle>
+                        <AdminBookingBox>
+                          <AdminBookingLabel>Nome</AdminBookingLabel>
+                          <AdminBookingName>{getUserName(booking.userId)}</AdminBookingName>
+                        </AdminBookingBox>
+                        <AdminBookingBoxHorizontalGrid2>
+                          <AdminBookingBox>
+                            <AdminBookingLabel>Email</AdminBookingLabel>
+                            <AdminBookingName>{getUserEmail(booking.userId)}</AdminBookingName>
+                          </AdminBookingBox>
+                          <AdminBookingBox>
+                            <AdminBookingLabel>Capacidade</AdminBookingLabel>
+                            <AdminBookingName>4 pessoas</AdminBookingName>
+                          </AdminBookingBox>
+                        </AdminBookingBoxHorizontalGrid2>
+                        <AdminBookingBoxHorizontalGrid2>
+                          <AdminBookingBox>
+                            <AdminBookingLabel>Check-In</AdminBookingLabel>
+                            <AdminBookingName>{booking.from}</AdminBookingName>
+                          </AdminBookingBox>
+                          <AdminBookingBox>
+                            <AdminBookingLabel>Check-Out</AdminBookingLabel>
+                            <AdminBookingName>{booking.to}</AdminBookingName>
+                          </AdminBookingBox>
+                        </AdminBookingBoxHorizontalGrid2>
+                      </AdminBookingInfo>
+                    </AdminBookingCardText>
+
+                    <RoomCardButtonContainer>
+                      <span style={{ fontWeight: '500', fontSize: 14 }} >{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(booking.amount)}</span>
+
+                      <RoomCardButton onClick={() => deleteData(booking.id, booking.roomId, booking.from, booking.to)} >Cancelar Reserva</RoomCardButton>
+                    </RoomCardButtonContainer>
+                  </AdminBookingCard>
+                ))}
+            </AdminCards>
+          </AdminContainer>
+        </AdminSection>
+      </Layout>
+    </>
   );
 }
 

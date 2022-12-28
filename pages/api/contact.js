@@ -37,7 +37,7 @@ const handler = async (req, res) => {
 
     const mailOptions = {
       from: email,
-      to: data.email,
+      to: [data.email, email],
     };
 
     try {
