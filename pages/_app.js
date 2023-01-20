@@ -10,7 +10,7 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 NProgress.configure({ showSpinner: false });
 
-const noAuthRequired = ['/login', '/signup']
+const noAuthRequired = ['/login', '/signup', '/reset-password']
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
