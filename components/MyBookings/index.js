@@ -4,6 +4,7 @@ import { BookingBox, BookingBoxHorizontalGrid2, BookingCard, BookingCardImage, B
 import { useAuth } from "../../context/AuthContext";
 import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import fireDB from "../../firebase/initFirebase";
+import { sendCancelationMessage } from "../../lib/api";
 
 const MyBookingsPage = ({ bookings, rooms, users }) => {
   const { user } = useAuth()
@@ -34,10 +35,10 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
     return userEmail
   }
 
-  async function deleteData(bookingId, roomId, bookingFrom, bookingTo) {
+  async function deleteData(bookingId, roomId, bookingFrom, bookingTo, bookingAmount, bookingUserId) {
     try {
       if (confirm("Você tem certeza de que deseja cancelar esta reserva?") == true) {
-        await deleteDoc(doc(fireDB, "bookings", bookingId)).then(
+        await deleteDoc(doc(fireDB, "bookings", bookingId)).then(function() {
           updateDoc(doc(fireDB, "rooms", roomId), {
             currentBookings: arrayRemove({
               bookingId: bookingId,
@@ -45,7 +46,17 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
               todate: bookingTo
             })
           })
-        )
+          sendCancelationMessage({
+            name: getUserName(bookingUserId),
+            email: user.email,
+            subject: 'Reserva Cancelada com Sucesso - ADUFPI',
+            from: bookingFrom,
+            to: bookingTo,
+            room: getRoomName(roomId),
+            amount: Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(bookingAmount),
+            bookingId: bookingId
+          })
+        })
         alert("Reserva cancelada!")
         location.reload()
       }
@@ -101,7 +112,7 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
                 <RoomCardButtonContainer>
                   <span style={{ fontWeight: '500', fontSize: 14 }} >{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(booking.amount)}</span>
 
-                  <RoomCardButton onClick={() => deleteData(booking.id, booking.roomId, booking.from, booking.to)} >Cancelar Reserva</RoomCardButton>
+                  <RoomCardButton onClick={() => deleteData(booking.id, booking.roomId, booking.from, booking.to, booking.amount, booking.userId)} >Cancelar Reserva</RoomCardButton>
                 </RoomCardButtonContainer>
               </BookingCard>
             ))}

@@ -35,7 +35,9 @@ const Navbar = ({ toggle, userName }) => {
 						<NavbarBottom>
 							<NavbarItem>
 								<FaUser />
-								<NavbarLink>{userName}</NavbarLink>
+								<Link href={'/profile'} passHref >
+									<NavbarLink>{userName}</NavbarLink>
+								</Link>
 							</NavbarItem>
 						</NavbarBottom>
 						<NavbarBottom>

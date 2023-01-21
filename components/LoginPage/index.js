@@ -73,7 +73,7 @@ const LoginPage = () => {
                 'Entrando...'
               }
               </FormButton>
-            <span><Link href={'/reset-password'}>Esqueci minha senha</Link></span>
+            <FormSpan><Link href={'/reset-password'}>Esqueci minha senha</Link></FormSpan>
             <FormSpan>Não possui uma conta? <Link href={'/signup'}>Cadastre-se</Link></FormSpan>
           </ButtonWrap>
         </LoginForm>

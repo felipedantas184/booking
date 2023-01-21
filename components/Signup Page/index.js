@@ -7,6 +7,7 @@ import Link from "next/link";
 import fireDB, { auth } from "../../firebase/initFirebase";
 import { doc, setDoc } from "firebase/firestore";
 import Image from "next/image";
+import { updateProfile } from "firebase/auth";
 
 const SignupPage = () => {
   const router = useRouter()
@@ -35,6 +36,9 @@ const SignupPage = () => {
           cpf: data.cpf,
           email: data.email
         })
+      })
+      updateProfile(auth.currentUser, {
+        displayName: data.name + ' ' + data.surname,
       })
       router.push('/')
     } catch (err) {

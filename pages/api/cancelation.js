@@ -5,7 +5,7 @@ const CONTACT_MESSAGE_FIELDS = {
   name: "Name",
   bookingId: "Código da Reserva",
   email: "Email",
-  subject: "Assunto",
+  subject: "Subject",
   from: "Check-In",
   to: 'Check-Out',
   room: 'Quarto',
