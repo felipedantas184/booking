@@ -2,10 +2,11 @@ import { getAuth } from "firebase/auth";
 import { useAuth } from "../../context/AuthContext";
 import { BookingBox, Column1, Column2, GridOne, GridTwo, InfoBigGroup, InfoBox, InfoGroup, InfoHeading, InfoSubtitle, InfoTitle, Section, Title, UserImage, UserName, Wrapper } from "./ProfileStyles";
 
-const Profile = () => {
+const Profile = ({ users }) => {
   const { user } = useAuth()
 
-  console.log(user)
+  const userProfile = users.filter((u) => u.id == user.uid)[0]
+  console.log(userProfile.name)
 
   return (
     <Section>
@@ -13,26 +14,26 @@ const Profile = () => {
         <GridOne>
           <InfoBox>
             <InfoHeading>
-              <UserImage>FE</UserImage>
-              <UserName>Felipe Augusto Oliveira Dantas</UserName>
+              <UserImage>{userProfile.name.slice(0,2)}</UserImage>
+              <UserName>{userProfile.name} {userProfile.surname}</UserName>
             </InfoHeading>
             <InfoBigGroup>
               <Column1>
                 <InfoGroup>
                   <InfoTitle>Nome</InfoTitle>
-                  <InfoSubtitle>Felipe Augusto Oliveira Dantas</InfoSubtitle>
+                  <InfoSubtitle>{userProfile.name} {userProfile.surname}</InfoSubtitle>
                 </InfoGroup>
                 <InfoGroup>
                   <InfoTitle>E-mail</InfoTitle>
-                  <InfoSubtitle>felipedantas184@gmail.com</InfoSubtitle>
+                  <InfoSubtitle>{userProfile.email}</InfoSubtitle>
                 </InfoGroup>
                 <InfoGroup>
                   <InfoTitle>Telefone</InfoTitle>
-                  <InfoSubtitle>(86) 99518-5757</InfoSubtitle>
+                  <InfoSubtitle>({userProfile.phone.slice(0,2)}) {userProfile.phone.slice(2,7)}-{userProfile.phone.slice(7,11)}</InfoSubtitle>
                 </InfoGroup>
                 <InfoGroup>
                   <InfoTitle>CPF</InfoTitle>
-                  <InfoSubtitle>056.202.043-83</InfoSubtitle>
+                  <InfoSubtitle>{userProfile.cpf.slice(0,3)}.{userProfile.cpf.slice(3,6)}.{userProfile.cpf.slice(6,9)}-{userProfile.cpf.slice(9,11)}</InfoSubtitle>
                 </InfoGroup>
               </Column1>
               <Column2>

@@ -67,7 +67,6 @@ const Admin = ({ bookings, rooms, users }) => {
 
     return value
   }
-
   const getRoomName = (roomId) => {
     const room = rooms.filter((room) => room.id == roomId)
     const roomName = (room[0].title)

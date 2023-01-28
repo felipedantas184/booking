@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { RoomCard, RoomCardButton, RoomCardButtonContainer, RoomCardButtonSpan, RoomCardImage, RoomCardLocation, RoomCardText, RoomCardTextCategory, RoomCardTextSpan, RoomCardTitle, RoomsCards, RoomsListContainer, RoomsListHeading, RoomsListSection, RoomsListSubtitle, RoomsListTitle } from "./RoomsListStyles";
+import { RoomCard, RoomCardButton, RoomCardButtonContainer, RoomCardButtonDisabled, RoomCardButtonSpan, RoomCardImage, RoomCardLocation, RoomCardText, RoomCardTextCategory, RoomCardTextSpan, RoomCardTitle, RoomsCards, RoomsListContainer, RoomsListHeading, RoomsListSection, RoomsListSubtitle, RoomsListTitle } from "./RoomsListStyles";
 import Router from 'next/router'
 
 import { DatePicker } from 'antd'
@@ -46,21 +46,24 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
               <RoomCardText>
                 <RoomCardTextCategory>
                   <RoomCardTextSpan>Diária: {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.price)}</RoomCardTextSpan>
-                  <RoomCardTextSpan>4 <FiUsers size={14} color={'#EB5757'}/></RoomCardTextSpan>
+                  <RoomCardTextSpan>4 <FiUsers size={14} color={'#EB5757'} /></RoomCardTextSpan>
                 </RoomCardTextCategory>
                 <RoomCardTitle>{room.title}</RoomCardTitle>
                 <RoomCardLocation>{room.resume}</RoomCardLocation>
               </RoomCardText>
 
-              {(totaldays !== 0) && (
-                <RoomCardButtonContainer>
-                  <span style={{fontWeight: '500'}} >{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room.price)}</span>
 
-                  <RoomCardButton onClick={() => sendData(room)}>
-                    Reservar Agora
-                  </RoomCardButton>
-                </RoomCardButtonContainer>
-              )}
+              <RoomCardButtonContainer>
+                <span style={{ fontWeight: '500'}} >
+                  {(totaldays == 0) ? ('') : (Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room.price))}
+                </span>
+                {(totaldays == 0) ? (
+                  <RoomCardButtonDisabled disabled={true}>Selecione as Datas</RoomCardButtonDisabled>
+                ) : (
+                  <RoomCardButton onClick={() => sendData(room)} >Reservar Agora</RoomCardButton>
+                )}
+              </RoomCardButtonContainer>
+
             </RoomCard>
           ))}
         </RoomsCards>

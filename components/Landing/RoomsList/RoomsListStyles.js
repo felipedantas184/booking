@@ -111,3 +111,24 @@ export const RoomCardButton = styled.button`
 export const RoomCardButtonSpan = styled.span`
 	
 `
+export const RoomCardButtonDisabled = styled.button`
+  padding: 8px 16px;
+  text-transform: capitalize;
+  border-radius: 8px;
+  border: 0;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+  font-family: 'Poppins' !important;
+  background-color: #454545;
+  cursor: pointer;
+  transition: 0.5s;
+  
+  &:hover, &:focus {
+    box-shadow: inset 200px 0 0 0 #13131A;
+  }
+
+  a {
+    color: #fff !important;
+  }
+`

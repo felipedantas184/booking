@@ -5,6 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import fireDB from "../../firebase/initFirebase";
 import { sendCancelationMessage } from "../../lib/api";
+import moment from "moment";
 
 const MyBookingsPage = ({ bookings, rooms, users }) => {
   const { user } = useAuth()
@@ -35,30 +36,38 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
     return userEmail
   }
 
+
+  console.log(moment().utcOffset('-03:00').format('DD-MM-YYYY'))
+  console.log(moment.duration((moment(myBookings[0].from, 'DD-MM-YYYY').diff(moment(moment().utcOffset('-03:00').format('DD-MM-YYYY'), 'DD-MM-YYYY')))).asDays())
+
   async function deleteData(bookingId, roomId, bookingFrom, bookingTo, bookingAmount, bookingUserId) {
     try {
       if (confirm("Você tem certeza de que deseja cancelar esta reserva?") == true) {
-        await deleteDoc(doc(fireDB, "bookings", bookingId)).then(function() {
-          updateDoc(doc(fireDB, "rooms", roomId), {
-            currentBookings: arrayRemove({
-              bookingId: bookingId,
-              fromdate: bookingFrom,
-              todate: bookingTo
+        if (moment.duration((moment(bookingFrom, 'DD-MM-YYYY').diff(moment(moment().utcOffset('-03:00').format('DD-MM-YYYY'), 'DD-MM-YYYY')))).asDays() > 0) {
+          await deleteDoc(doc(fireDB, "bookings", bookingId)).then(function() {
+            updateDoc(doc(fireDB, "rooms", roomId), {
+              currentBookings: arrayRemove({
+                bookingId: bookingId,
+                fromdate: bookingFrom,
+                todate: bookingTo
+              })
+            })
+            sendCancelationMessage({
+              name: getUserName(bookingUserId),
+              email: user.email,
+              subject: 'Reserva Cancelada com Sucesso - ADUFPI',
+              from: bookingFrom,
+              to: bookingTo,
+              room: getRoomName(roomId),
+              amount: Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(bookingAmount),
+              bookingId: bookingId
             })
           })
-          sendCancelationMessage({
-            name: getUserName(bookingUserId),
-            email: user.email,
-            subject: 'Reserva Cancelada com Sucesso - ADUFPI',
-            from: bookingFrom,
-            to: bookingTo,
-            room: getRoomName(roomId),
-            amount: Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(bookingAmount),
-            bookingId: bookingId
-          })
-        })
-        alert("Reserva cancelada!")
-        location.reload()
+          alert("Reserva cancelada!")
+          location.reload()
+        } else {
+          alert('Não é possível cancelar reservas passadas.')
+        }
       }
     } catch (error) {
       alert(error)

@@ -41,6 +41,7 @@ export const UserImage = styled.div`
   width: 100px;
   background-color: darkcyan;
   border-radius: 50%;
+  text-transform: uppercase;
 
   display: flex;
   justify-content: center;
