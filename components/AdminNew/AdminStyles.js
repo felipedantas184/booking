@@ -78,7 +78,7 @@ export const HeaderItemSmall = styled.div`
 export const TableRow = styled.div`
   background-color: #F1F1F1;
   width: 100%;
-  padding: 16px;
+  padding: 16px 8px;
 
   display: flex;
   flex-direction: row;

@@ -1,10 +1,19 @@
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAuth } from "../context/AuthContext"
 import LoginPage from "../components/LoginPage"
 import Head from "next/head"
 
 const Login = () => {
+  const { user } = useAuth()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (user) {
+      router.push('/')
+    }
+  }, [router, user])
+
   return (
     <>
       <Head>

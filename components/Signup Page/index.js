@@ -1,4 +1,4 @@
-import { ButtonWrap, FormButton, FormHeading, FormSpan, FormSubtitle, FormTitle, Input, InputGroup, InputLabel, InputSplit, InputSplitGroup, InputWrap, LoginContainer, LoginForm, LoginMessage, LoginSection, MessageSubtitle, MessageTitle } from "./SignupStyles";
+import { ButtonWrap, FormButton, FormHeading, FormSpan, FormSubtitle, FormTitle, FormWrapper, Input, InputGroup, InputLabel, InputSplit, InputSplitGroup, InputWrap, LoginContainer, LoginForm, LoginMessage, LoginSection, MessageSubtitle, MessageTitle } from "./SignupStyles";
 
 import { useRouter } from "next/router"
 import { useState } from "react"
@@ -18,7 +18,12 @@ const SignupPage = () => {
     name: '',
     surname: '',
     phone: '',
-    cpf: ''
+    cpf: '',
+    adress: '',
+    number: '',
+    district: '',
+    cep: '',
+    relation: '',
   })
 
   const [loading, setLoading] = useState(false)
@@ -34,7 +39,13 @@ const SignupPage = () => {
           surname: data.surname,
           phone: data.phone,
           cpf: data.cpf,
-          email: data.email
+          email: data.email,
+          adress: data.adress,
+          number: data.number,
+          district: data.district,
+          cep: data.cep,
+          relation: data.relation,
+          admin: false,
         })
       })
       updateProfile(auth.currentUser, {
@@ -52,103 +63,162 @@ const SignupPage = () => {
       <LoginContainer>
         <LoginForm onSubmit={handleSignup}>
           <FormHeading>
-            <Image src={'/images/adufpi_logo.png'} width={200} height={66} alt='ADUFPI'  />
+            <Image src={'/images/adufpi_logo.png'} width={200} height={66} alt='ADUFPI' />
             <FormSubtitle>Cadastro</FormSubtitle>
           </FormHeading>
-          <InputWrap>
-            <InputSplit>
-              <InputSplitGroup>
+          <FormWrapper>
+            <InputWrap>
+              <InputGroup>
                 <InputLabel>Nome</InputLabel>
-                <Input type={'text'} placeholder="Seu nome" required style={{textTransform: 'capitalize'}}
-                onChange={(e) =>
-                  setData({
-                    ...data,
-                    name: e.target.value,
-                  })
-                }
-                value={data.name}
-              />
-              </InputSplitGroup>
-              <InputSplitGroup>
+                <Input type={'text'} placeholder="João Batista" required
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      name: e.target.value,
+                    })
+                  }
+                  value={data.name}
+                />
+              </InputGroup>
+              <InputGroup>
                 <InputLabel>Sobrenome</InputLabel>
-                <Input type={'text'} placeholder="Seu sobrenome" required style={{textTransform: 'capitalize'}}
-                onChange={(e) =>
-                  setData({
-                    ...data,
-                    surname: e.target.value,
-                  })
-                }
-                value={data.surname}
-              />
-              </InputSplitGroup>
-            </InputSplit>
-            <InputSplit>
-              <InputSplitGroup>
+                <Input type={'text'} placeholder="da Silva Barros" required
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      surname: e.target.value,
+                    })
+                  }
+                  value={data.surname}
+                />
+              </InputGroup>
+              <InputGroup>
+                <InputLabel>E-mail</InputLabel>
+                <Input type={'email'} placeholder="Digite seu e-mail" required
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      email: e.target.value,
+                    })
+                  }
+                  value={data.email}
+                />
+              </InputGroup>
+              <InputGroup>
+                <InputLabel>Senha</InputLabel>
+                <Input type={'password'} placeholder="Digite sua senha" required
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      password: e.target.value,
+                    })
+                  }
+                  value={data.password}
+                />
+              </InputGroup>
+            </InputWrap>
+            <InputWrap>
+              <InputGroup>
                 <InputLabel>Telefone</InputLabel>
-                <Input type={'number'} placeholder="Ex: 86995185757" required
-                onChange={(e) =>
-                  setData({
-                    ...data,
-                    phone: e.target.value,
-                  })
-                }
-                value={data.phone}
-              />
+                <Input type={'number'} placeholder="86995185757" required
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      phone: e.target.value,
+                    })
+                  }
+                  value={data.phone}
+                />
+              </InputGroup>
+              <InputGroup>
+                <InputLabel>CPF</InputLabel>
+                <Input type={'number'} placeholder="05620204383" required
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      cpf: e.target.value,
+                    })
+                  }
+                  value={data.cpf}
+                />
+              </InputGroup>
+              <InputGroup>
+                <InputLabel>Endereço</InputLabel>
+                <Input type={'text'} placeholder="Av. Joca Pires, 1231" required
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      adress: e.target.value,
+                    })
+                  }
+                  value={data.adress}
+                />
+              </InputGroup>
+              <InputSplit>
+                <InputSplitGroup>
+                  <InputLabel>Bairro</InputLabel>
+                  <Input type={'text'} placeholder="Fátima" required
+                    onChange={(e) =>
+                      setData({
+                        ...data,
+                        district: e.target.value,
+                      })
+                    }
+                    value={data.district}
+                  />
+                </InputSplitGroup>
+                <InputSplitGroup>
+                  <InputLabel>CEP</InputLabel>
+                  <Input type={'number'} placeholder="64001220" required
+                    onChange={(e) =>
+                      setData({
+                        ...data,
+                        cep: e.target.value,
+                      })
+                    }
+                    value={data.cep}
+                  />
+                </InputSplitGroup>
+              </InputSplit>
+            </InputWrap>
+          </FormWrapper>
+          <ButtonWrap>
+            <InputSplit style={{ justifyContent: 'space-between', width: '100%', marginLeft: 16, marginBottom: 16, marginTop: 16}}>
+              <InputSplitGroup>
+                <div>
+                  <input type="radio" id="member" name="relation" value="member" required  
+                  onClick={(e) =>
+                    setData({
+                      ...data,
+                      relation: e.target.value,
+                    })
+                  }/>
+                  <InputLabel htmlFor="member">Associado</InputLabel>
+                </div>
               </InputSplitGroup>
               <InputSplitGroup>
-                <InputLabel>CPF</InputLabel>
-                <Input type={'number'} placeholder="Ex: 05620204383" required
-                onChange={(e) =>
-                  setData({
-                    ...data,
-                    cpf: e.target.value,
-                  })
-                }
-                value={data.cpf}
-              />
+                <div>
+                  <input type="radio" id="guest" name="relation" value="guest" 
+                  onClick={(e) =>
+                    setData({
+                      ...data,
+                      relation: e.target.value,
+                    })
+                  }/>
+                  <InputLabel htmlFor="guest">Convidado</InputLabel>
+                </div>
               </InputSplitGroup>
             </InputSplit>
-            <InputGroup>
-              <InputLabel>E-mail</InputLabel>
-              <Input type={'email'} placeholder="Digite seu e-mail" required 
-                onChange={(e) =>
-                  setData({
-                    ...data,
-                    email: e.target.value,
-                  })
-                }
-                value={data.email}
-              />
-            </InputGroup>
-            
-            <InputGroup>
-              <InputLabel>Senha</InputLabel>
-              <Input type={'password'} placeholder="Digite sua senha" required 
-              onChange={(e) =>
-                setData({
-                  ...data,
-                  password: e.target.value,
-                })
-              }
-              value={data.password}
-              />
-            </InputGroup>
-          </InputWrap>
-          <ButtonWrap>
             <FormButton type="submit" >
               {!loading ? (
                 'Entrar'
               ) :
                 'Entrando...'
               }
-              </FormButton>
+            </FormButton>
             <FormSpan>Já possui uma conta? <Link href={'/login'}>Entre</Link></FormSpan>
           </ButtonWrap>
         </LoginForm>
-        <LoginMessage>
-          <MessageTitle>Seja Bem-Vindo!</MessageTitle>
-          <MessageSubtitle>Falta pouco para conhecer os quartos disponíveis para sua reserva!</MessageSubtitle>
-        </LoginMessage>
       </LoginContainer>
     </LoginSection>
   );

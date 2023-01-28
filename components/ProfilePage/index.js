@@ -6,7 +6,6 @@ const Profile = ({ users }) => {
   const { user } = useAuth()
 
   const userProfile = users.filter((u) => u.id == user.uid)[0]
-  console.log(userProfile.name)
 
   return (
     <Section>
@@ -38,20 +37,20 @@ const Profile = ({ users }) => {
               </Column1>
               <Column2>
                 <InfoGroup>
-                  <InfoTitle>Cidade</InfoTitle>
-                  <InfoSubtitle>Teresina, PI</InfoSubtitle>
+                  <InfoTitle>Relação</InfoTitle>
+                  <InfoSubtitle>{userProfile.relation ? ('Associado') : ('Convidado')}</InfoSubtitle>
                 </InfoGroup>
                 <InfoGroup>
-                  <InfoTitle>Bairro</InfoTitle>
-                  <InfoSubtitle>Gurupi</InfoSubtitle>
+                  <InfoTitle>CEP</InfoTitle>
+                  <InfoSubtitle>{userProfile.cep.slice(0,5)}-{userProfile.cep.slice(5,8)}</InfoSubtitle>
                 </InfoGroup>
                 <InfoGroup>
                   <InfoTitle>Endereço</InfoTitle>
-                  <InfoSubtitle>Av. Prof. Zaíra Freire, 647</InfoSubtitle>
+                  <InfoSubtitle>{userProfile.adress}</InfoSubtitle>
                 </InfoGroup>
                 <InfoGroup>
                   <InfoTitle>Bairro</InfoTitle>
-                  <InfoSubtitle>Gurupi</InfoSubtitle>
+                  <InfoSubtitle>{userProfile.district}</InfoSubtitle>
                 </InfoGroup>
               </Column2>
             </InfoBigGroup>

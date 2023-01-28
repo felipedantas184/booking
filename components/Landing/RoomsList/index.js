@@ -11,6 +11,11 @@ import moment from 'moment';
 const { RangePicker } = DatePicker;
 import locale from 'antd/lib/date-picker/locale/pt_BR';
 import Link from "next/link";
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import fireDB from "../../../firebase/initFirebase";
+import { useAuth } from "../../../context/AuthContext";
+import { async } from "@firebase/util";
 
 const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }) => {
   function sendData(room) {
@@ -27,6 +32,19 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
     return current && current < moment().endOf("day")
   };
 
+  const { user } = useAuth()
+
+  const [userData, setUserData] = useState()
+
+  async function getData() {
+    const getUserData = await getDoc(doc(fireDB, "users", '5NKgkBe6uMao7fbeOTj5LoDgZO72'))
+    console.log(getUserData.data())
+    setUserData(getUserData)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
 
 
   return (

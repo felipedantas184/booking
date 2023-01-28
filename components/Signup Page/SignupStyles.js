@@ -11,8 +11,6 @@ export const LoginSection = styled.section`
 export const LoginContainer = styled.div`
 	width: 75vw;
   max-width: 800px;
-  height: 80vh;
-  max-height: 550px;
   min-height: 500px;
   margin: auto;
 
@@ -24,7 +22,6 @@ export const LoginContainer = styled.div`
   @media screen and (max-width: 720px) {
     width: 100%;
     padding: 16px;
-    max-height: 550px;
     flex-direction: column-reverse;
   }
 `
@@ -32,7 +29,7 @@ export const LoginForm = styled.form`
 	flex: 5;
   background-color: #FFF;
   padding: 16px;
-  border-radius: 20px 0 0 20px; 
+  border-radius: 20px; 
 
   display: flex;
   flex-direction: column;
@@ -46,9 +43,20 @@ export const LoginForm = styled.form`
 export const FormHeading = styled.div`
 	text-align: center;
   width: 60%;
+  margin-bottom: 16px;
 
   @media screen and (max-width: 720px) {
     width: 100%;
+  }
+`
+export const FormWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+  
+  @media screen and (max-width: 720px) {
+    flex-direction: column;
   }
 `
 export const FormTitle = styled.h1`
@@ -81,10 +89,11 @@ export const LoginMessage = styled.div`
   }
 `
 export const InputWrap = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
 `
 export const InputGroup = styled.div`
   width: 100%;

@@ -82,7 +82,7 @@ export const RoomCardLocation = styled.p`
 `
 export const RoomCardButtonContainer = styled.div`
 	border-top: 1px solid #cccfd9;
-  padding: 10px 30px;
+  padding: 10px 16px;
   align-items: center;
   display: flex;
   justify-content: space-between;

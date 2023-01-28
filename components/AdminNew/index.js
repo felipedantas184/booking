@@ -8,9 +8,15 @@ import { useState } from "react";
 import { MdOutlineCancel } from 'react-icons/md'
 
 const Admin = ({bookings, rooms, users}) => {
-  console.log(bookings.sort((a,b) => (a.from > b.from) ? 1 : ((b.from > a.from) ? -1 : 0)))
-  
   const [selectedMonth, setSelectedMonth] = useState(moment().utcOffset('-03:00').format('DD-MM-YYYY hh:mm:ss a').slice(3, 10))
+
+  function byDate(a, b) {
+    //chronologically by year, month, then day
+    return new Date(a.from.split('-').reverse().join()).valueOf() - new Date(b.from.split('-').reverse().join()).valueOf(); //timestamps
+  }
+
+  const sortedBookings = bookings.sort(byDate)
+
   
   const onChange = (date, dateString) => {
     setSelectedMonth(dateString)
@@ -71,7 +77,7 @@ const Admin = ({bookings, rooms, users}) => {
               <HeaderItemSmall>Status</HeaderItemSmall>
               <HeaderItemSmall>Ação</HeaderItemSmall>
             </TableHeader>
-            {bookings.filter((item) => item.from.slice(3, 10) == selectedMonth)
+            {sortedBookings.filter((item) => item.from.slice(3, 10) == selectedMonth)
               .map((booking) => (
                 <TableRow key={booking.id} >
                   <TableItem>{getUserName(booking.userId)}</TableItem>

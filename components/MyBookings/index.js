@@ -36,9 +36,13 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
     return userEmail
   }
 
+  function byDate(a, b) {
+    //chronologically by year, month, then day
+    return new Date(a.from.split('-').reverse().join()).valueOf() - new Date(b.from.split('-').reverse().join()).valueOf(); //timestamps
+  }
 
-  console.log(moment().utcOffset('-03:00').format('DD-MM-YYYY'))
-  console.log(moment.duration((moment(myBookings[0].from, 'DD-MM-YYYY').diff(moment(moment().utcOffset('-03:00').format('DD-MM-YYYY'), 'DD-MM-YYYY')))).asDays())
+  const sortedBookings = myBookings.sort(byDate)
+
 
   async function deleteData(bookingId, roomId, bookingFrom, bookingTo, bookingAmount, bookingUserId) {
     try {
@@ -81,9 +85,9 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
           <BookingsTitle>Minhas Reservas</BookingsTitle>
           <BookingsSubtitle>Confira aqui suas reservas.</BookingsSubtitle>
         </BookingsHeading>
-        {myBookings.length > 0 ? (
+        {sortedBookings.length > 0 ? (
           <BookingsCards>
-            {myBookings.map((booking) => (
+            {sortedBookings.map((booking) => (
               <BookingCard key={booking.id}>
                 <BookingCardImage>
                   <Image src={'https:' + getRoomImage(booking.roomId)} alt={getRoomName(booking.roomId)} layout='fill' />

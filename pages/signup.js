@@ -1,7 +1,19 @@
 import Head from "next/head"
+import { useRouter } from "next/router"
+import { useEffect } from "react"
 import SignupPage from "../components/Signup Page"
+import { useAuth } from "../context/AuthContext"
 
 const Signup = () => {
+  const { user } = useAuth()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (user) {
+      router.push('/')
+    }
+  }, [router, user])
+
   return (
     <>
       <Head>
