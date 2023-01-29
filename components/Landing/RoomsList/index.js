@@ -74,7 +74,7 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
           {availableRooms.map((room) => (
             <RoomCard key={room.id}>
               <RoomCardImage>
-                <Image src={'https:' + room.imageurl} alt={room.title} layout='fill' />
+                <Image src={room.imageurl} alt={room.title} layout='fill' />
               </RoomCardImage>
               <RoomCardText>
                 <RoomCardTextCategory>

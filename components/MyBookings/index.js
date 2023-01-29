@@ -90,7 +90,7 @@ const MyBookingsPage = ({ bookings, rooms, users }) => {
             {sortedBookings.map((booking) => (
               <BookingCard key={booking.id}>
                 <BookingCardImage>
-                  <Image src={'https:' + getRoomImage(booking.roomId)} alt={getRoomName(booking.roomId)} layout='fill' />
+                  <Image src={getRoomImage(booking.roomId)} alt={getRoomName(booking.roomId)} layout='fill' />
                 </BookingCardImage>
                 <BookingCardText>
                   <BookingInfo>

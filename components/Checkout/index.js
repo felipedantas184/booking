@@ -84,7 +84,7 @@ const Checkout = ({ room, roomId, userName }) => {
         <CheckoutBottomContainer>
           <CheckoutBottomContainerOne>
             <CheckoutImageWrapper>
-              <Image src={room ? 'https:' + room.imageurl : '/images/banner.jpg'} alt={room ? room.title : ''} layout="fill" />
+              <Image src={room ? room.imageurl : '/images/banner.jpg'} alt={room ? room.title : ''} layout="fill" />
             </CheckoutImageWrapper>
             <CheckoutFeatures>
             </CheckoutFeatures>

@@ -1,6 +1,9 @@
 import { collection, getDocs } from "firebase/firestore";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Admin from "../components/AdminNew";
 import Layout from "../components/Layout/Layout";
+import { useAuth } from "../context/AuthContext";
 import fireDB from "../firebase/initFirebase";
 
 export async function getServerSideProps() {
@@ -47,9 +50,24 @@ export async function getServerSideProps() {
 }
 
 const AdminPageNew = ({ bookings, rooms, users }) => {
+  const router = useRouter()
+  const { user } = useAuth()
+
+  const userData = users.filter((u) => u.id == user.uid)
+  const adminPrivilege = userData[0].admin
+
+  useEffect(() => {
+    console.log(adminPrivilege)
+    if (!adminPrivilege) {
+      router.push('/')
+    }
+  }, [adminPrivilege, router])
+
   return ( 
     <Layout>
-      <Admin bookings={bookings} rooms={rooms} users={users} />
+      {(adminPrivilege) && (
+        <Admin bookings={bookings} rooms={rooms} users={users} />
+      )}
     </Layout>
    );
 }
