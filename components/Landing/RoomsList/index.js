@@ -85,7 +85,7 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
                       {(userData.relation === 'member') ? (Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.price)) : (Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.guestprice))}
                     </RoomCardTextSpan>
                   )}
-                  <RoomCardTextSpan>4 <FiUsers size={14} color={'#EB5757'} /></RoomCardTextSpan>
+                  <RoomCardTextSpan>{room.capacity}<FiUsers size={14} color={'#EB5757'} /></RoomCardTextSpan>
                 </RoomCardTextCategory>
                 <RoomCardTitle>{room.title}</RoomCardTitle>
                 <RoomCardLocation>{room.resume}</RoomCardLocation>

@@ -17,7 +17,7 @@ const Footer = () => {
           <SocialMediaWrap>
             <Link href='/' passHref>
 							<SocialLogo onClick={toggleHome}>
-                <Image src={'/images/adufpi_logo.png'} alt="ADUFPI" layout='fill' />
+                <Image src={'/images/adufpi_logo_white.png'} alt="ADUFPI" layout='fill' />
 							</SocialLogo>
             </Link>
             <WebsiteRights>ADUFPI © {new Date().getFullYear()} Criado por Tecdata.</WebsiteRights>

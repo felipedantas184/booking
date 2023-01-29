@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const FooterContainer = styled.footer`
-  background-color: #F1F1F1;
+  background-color: #13131A;
   font-family: 'Poppins', sans-serif;
 `
 export const FooterWrap = styled.div`
@@ -44,7 +44,7 @@ export const SocialLogo = styled.a`
   -webkit-tap-highlight-color: transparent;
 `
 export const WebsiteRights = styled.small`
-  color: #13131A;
+  color: #F1F1F1;
   font-size: 14px;
 `
 export const SocialIcons = styled.div`
@@ -54,7 +54,7 @@ export const SocialIcons = styled.div`
   width: 240px;
 `
 export const SocialIconLink = styled.a`
-  color: #13131A;
+  color: #F1F1F1;
   font-size: 24px;
 
   &:hover {

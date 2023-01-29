@@ -2,7 +2,7 @@ import Head from "next/head";
 import Layout from '../components/Layout/Layout'
 import Landing from "../components/Landing/index.js";
 
-import { collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import fireDB from '../firebase/initFirebase';
 
 export async function getStaticProps() {
@@ -56,8 +56,90 @@ function byDate(a, b) {
   return new Date(a.dob.split('-').reverse().join()).valueOf() - new Date(b.dob.split('-').reverse().join()).valueOf(); //timestamps
 }
 
+const NewRooms = [
+  {
+    capacity: 2,
+    currentBookings: [{}],
+    description: "Quarto amplo com banheiro privativo, Wi-Fi gratuito e estacionamento privado",
+    guestprice: 50,
+    imageurl: "https://firebasestorage.googleapis.com/v0/b/booking-adac1.appspot.com/o/20230126165143_IMG_8640.JPG?alt=media&token=80c1c8d7-f381-4535-be91-510b712498dd",
+    price: 45,
+    resume: "Quarto amplo com banheiro privativo, Wi-Fi gratuito e estacionamento privado",
+    slug: "quarto-5",
+    title: "Quarto 5"
+  },
+  {
+    capacity: 2,
+    currentBookings: [{}],
+    description: "Quarto amplo com banheiro privativo, Wi-Fi gratuito e estacionamento privado",
+    guestprice: 50,
+    imageurl: "https://firebasestorage.googleapis.com/v0/b/booking-adac1.appspot.com/o/20230126165143_IMG_8640.JPG?alt=media&token=80c1c8d7-f381-4535-be91-510b712498dd",
+    price: 45,
+    resume: "Quarto amplo com banheiro privativo, Wi-Fi gratuito e estacionamento privado",
+    slug: "quarto-6",
+    title: "Quarto 6"
+  },
+  {
+    capacity: 2,
+    currentBookings: [{}],
+    description: "Quarto amplo com banheiro privativo, Wi-Fi gratuito e estacionamento privado",
+    guestprice: 50,
+    imageurl: "https://firebasestorage.googleapis.com/v0/b/booking-adac1.appspot.com/o/20230126165143_IMG_8640.JPG?alt=media&token=80c1c8d7-f381-4535-be91-510b712498dd",
+    price: 45,
+    resume: "Quarto amplo com banheiro privativo, Wi-Fi gratuito e estacionamento privado",
+    slug: "quarto-7",
+    title: "Quarto 7"
+  },
+  {
+    capacity: 2,
+    currentBookings: [{}],
+    description: "Quarto amplo com banheiro privativo, Wi-Fi gratuito e estacionamento privado",
+    guestprice: 50,
+    imageurl: "https://firebasestorage.googleapis.com/v0/b/booking-adac1.appspot.com/o/20230126165143_IMG_8640.JPG?alt=media&token=80c1c8d7-f381-4535-be91-510b712498dd",
+    price: 45,
+    resume: "Quarto amplo com banheiro privativo, Wi-Fi gratuito e estacionamento privado",
+    slug: "quarto-8",
+    title: "Quarto 8"
+  },
+  {
+    capacity: 2,
+    currentBookings: [{}],
+    description: "Quarto amplo com banheiro privativo, Wi-Fi gratuito e estacionamento privado",
+    guestprice: 50,
+    imageurl: "https://firebasestorage.googleapis.com/v0/b/booking-adac1.appspot.com/o/20230126165143_IMG_8640.JPG?alt=media&token=80c1c8d7-f381-4535-be91-510b712498dd",
+    price: 45,
+    resume: "Quarto amplo com banheiro privativo, Wi-Fi gratuito e estacionamento privado",
+    slug: "quarto-9",
+    title: "Quarto 9"
+  },
+  {
+    capacity: 2,
+    currentBookings: [{}],
+    description: "Quarto amplo com banheiro privativo, Wi-Fi gratuito e estacionamento privado",
+    guestprice: 50,
+    imageurl: "https://firebasestorage.googleapis.com/v0/b/booking-adac1.appspot.com/o/20230126165143_IMG_8640.JPG?alt=media&token=80c1c8d7-f381-4535-be91-510b712498dd",
+    price: 45,
+    resume: "Quarto amplo com banheiro privativo, Wi-Fi gratuito e estacionamento privado",
+    slug: "quarto-10",
+    title: "Quarto 10"
+  }
+]
+
+
 
 export default function Test({ rooms }) {
+  
+  /**async function addRooms() {
+    NewRooms.map(async (room) => {
+			try {
+				await addDoc(collection(fireDB, "rooms"), room)
+			} catch(error) {
+				console.log(error)
+			}
+		})
+  }
+  */
+
   return (
     <>
       <Head>
@@ -70,6 +152,7 @@ export default function Test({ rooms }) {
       </Head>
 
       <Layout>
+        <button onClick={() => addRooms()} >ADD DATA</button>
       </Layout>
     </>
   );

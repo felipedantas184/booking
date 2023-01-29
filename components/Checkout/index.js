@@ -108,7 +108,7 @@ const Checkout = ({ room, roomId, userName }) => {
                 </CheckoutBox>
                 <CheckoutBox>
                   <CheckoutLabel>Capacidade</CheckoutLabel>
-                  <CheckoutName>4 pessoas</CheckoutName>
+                  <CheckoutName>{room ? room.capacity : ''} pessoas</CheckoutName>
                 </CheckoutBox>
               </CheckoutBoxHorizontalGrid2>
               <CheckoutBoxHorizontalGrid2>
