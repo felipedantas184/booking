@@ -47,6 +47,7 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
 
         if (docSnap.exists()) {
           setUserData(docSnap.data());
+          console.log('Got the document!');
         } else {
           setUserData(undefined);
           console.log('No document!');

@@ -47,9 +47,9 @@ const SignupPage = () => {
         })
       })
       updateProfile(auth.currentUser, {
-        displayName: data.name,
+        displayName: data.name + ' ' + data.surname,
       })
-      router.push('/')
+      router.push('/login')
     } catch (err) {
       setLoading(false)
       alert(err)
