@@ -23,9 +23,10 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
       pathname: `/checkout/${room.id}`,
       query: {
         fromdate,
-        todate
+        todate,
+        totaldays
       }
-    }/**, '/checkout' */)
+    }, /**`/checkout/${room.id}`*/)
   }
 
   const disabledDate = (current) => {
@@ -35,16 +36,18 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
   const { user } = useAuth()
 
   const [userData, setUserData] = useState()
-
-  async function getData() {
-    const getUserData = await getDoc(doc(fireDB, "users", '5NKgkBe6uMao7fbeOTj5LoDgZO72'))
-    console.log(getUserData.data())
-    setUserData(getUserData)
-  }
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    async function getData() {
+      const getUserData = await getDoc(doc(fireDB, "users", user.uid))
+      const data = getUserData.data()
+      setUserData(data)
+      setLoading(false)
+    }
+
     getData()
-  }, [])
+  }, [user])
 
 
   return (
@@ -63,7 +66,13 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
               </RoomCardImage>
               <RoomCardText>
                 <RoomCardTextCategory>
-                  <RoomCardTextSpan>Diária: {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.price)}</RoomCardTextSpan>
+                  {(!userData) ? (
+                    <></>
+                  ) : (
+                    <RoomCardTextSpan>Diária:
+                      {(userData.relation === 'member') ? (Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.price)) : (Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(room.guestprice))}
+                    </RoomCardTextSpan>
+                  )}
                   <RoomCardTextSpan>4 <FiUsers size={14} color={'#EB5757'} /></RoomCardTextSpan>
                 </RoomCardTextCategory>
                 <RoomCardTitle>{room.title}</RoomCardTitle>
@@ -72,9 +81,14 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
 
 
               <RoomCardButtonContainer>
-                <span style={{ fontWeight: '500'}} >
-                  {(totaldays == 0) ? ('') : (Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room.price))}
-                </span>
+                {(!userData) ? (
+                  <></>
+                ) : (
+                  <span style={{ fontWeight: '500' }} >
+                    {(totaldays == 0) ? ('') : (userData.relation === 'member') ? (Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room.price)) : (Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(totaldays * room.guestprice))}
+                  </span>
+                )}
+                
                 {(totaldays == 0) ? (
                   <RoomCardButtonDisabled disabled={true}>Selecione as Datas</RoomCardButtonDisabled>
                 ) : (

@@ -11,7 +11,7 @@ const Navbar = ({ toggle, userName }) => {
 		scroll.scrollToTop();
 	}
 
-	const { user, logout } = useAuth()
+	const { logout } = useAuth()
 	const router = useRouter()
 
 	return (
@@ -29,9 +29,11 @@ const Navbar = ({ toggle, userName }) => {
 					<NavbarBottom><NavbarItem><FaBook />
 						<Link href={'/mybookings'}><NavbarLink>Minhas Reservas</NavbarLink></Link></NavbarItem>
 					</NavbarBottom>
-					<NavbarBottom><NavbarItem><FaUser />
-						<Link href={'/profile'} passHref ><NavbarLink>{userName}</NavbarLink></Link></NavbarItem>
-					</NavbarBottom>
+					{(userName) && (
+						<NavbarBottom><NavbarItem><FaUser />
+							<Link href={'/profile'} passHref ><NavbarLink>{userName}</NavbarLink></Link></NavbarItem>
+						</NavbarBottom>
+					)}
 					<NavbarBottom><NavbarItem onClick={() => {
 						logout()
 						router.push('/login')
