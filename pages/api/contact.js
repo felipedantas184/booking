@@ -2,7 +2,7 @@ import { transporter } from "../../config/nodemailer";
 const email = process.env.EMAIL;
 
 const CONTACT_MESSAGE_FIELDS = {
-  name: "Name",
+  name: "Nome",
   bookingId: "Código da Reserva",
   email: "Email",
   subject: "Assunto",

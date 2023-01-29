@@ -34,20 +34,31 @@ const RoomsList = ({ availableRooms, totaldays, filterByDate, fromdate, todate }
   };
 
   const { user } = useAuth()
-
   const [userData, setUserData] = useState()
-  const [loading, setLoading] = useState(true)
+	const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    async function getData() {
-      const getUserData = await getDoc(doc(fireDB, "users", user.uid))
-      const data = getUserData.data()
-      setUserData(data)
-      setLoading(false)
-    }
+	useEffect(() => {
+		const getUserData = async () => {
+      setLoading(true);
 
-    getData()
-  }, [user])
+      try {
+        const docRef = doc(fireDB, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setUserData(docSnap.data());
+        } else {
+          setUserData(undefined);
+          console.log('No document!');
+        }
+      } catch (e) {
+        setError(e.message);
+      }
+      setLoading(false);
+    };
+
+    getUserData();
+	}, [user])
 
 
   return (

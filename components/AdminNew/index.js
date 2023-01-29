@@ -158,8 +158,8 @@ const Admin = ({ bookings, rooms, users }) => {
             </TableHeader>
             <TableRow>
               <TableItem>{sortedBookings.filter((item) => item.from.slice(3, 10) == selectedMonth).length}</TableItem>
-              <TableItem>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(getTotalAmount(selectedMonth))}</TableItem>
               <TableItem>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(getTotalPaidAmount(selectedMonth))}</TableItem>
+              <TableItem>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(getTotalAmount(selectedMonth))}</TableItem>
             </TableRow>
           </Table>
         </TableWrapper>

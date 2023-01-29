@@ -14,20 +14,39 @@ const Layout = ({ children }) => {
 	}
 
 	const { user } = useAuth()
-	const [userName, setUserName] = useState()
+	const [userData, setUserData] = useState()
+	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		async function getUserName() {
-			const result = await getDoc(doc(fireDB, 'users', user.uid))
-			setUserName(result.data().name)
-		}
+		const getUserData = async () => {
+			setLoading(true);
 
-		getUserName()
+			try {
+				const docRef = doc(fireDB, "users", user.uid);
+				const docSnap = await getDoc(docRef);
+
+				if (docSnap.exists()) {
+					setUserData(docSnap.data());
+				} else {
+					setUserData(undefined);
+					console.log('No document!');
+				}
+			} catch (e) {
+				setError(e.message);
+			}
+			setLoading(false);
+		};
+
+		getUserData();
 	}, [user])
 
 	return (
 		<div className="content">
-			<Navbar toggle={toggle} userName={userName} />
+			{(!userData) ? (
+				<Navbar toggle={toggle} userName='Perfil' />
+			) : (
+				<Navbar toggle={toggle} userName={userData.name} />
+			)}
 			<Sidebar isOpen={isOpen} toggle={toggle} />
 			{children}
 			<Footer />
