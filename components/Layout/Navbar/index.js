@@ -31,7 +31,7 @@ const Navbar = ({ toggle, userName }) => {
 					</NavbarBottom>
 					{(userName) && (
 						<NavbarBottom><NavbarItem><FaUser />
-							<Link href={'/profile'} passHref ><NavbarLink>{userName}</NavbarLink></Link></NavbarItem>
+							<Link href={'/profile'} passHref ><NavbarLink>{(userName) ? userName : ('')}</NavbarLink></Link></NavbarItem>
 						</NavbarBottom>
 					)}
 					<NavbarBottom><NavbarItem onClick={() => {

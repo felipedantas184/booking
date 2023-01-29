@@ -38,7 +38,7 @@ const Profile = ({ users }) => {
               <Column2>
                 <InfoGroup>
                   <InfoTitle>Relação</InfoTitle>
-                  <InfoSubtitle>{userProfile.relation ? ('Associado') : ('Convidado')}</InfoSubtitle>
+                  <InfoSubtitle>{(userProfile.relation === 'member') ? 'Associado' : 'Convidado'}</InfoSubtitle>
                 </InfoGroup>
                 <InfoGroup>
                   <InfoTitle>CEP</InfoTitle>
