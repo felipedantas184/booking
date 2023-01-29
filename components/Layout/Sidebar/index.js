@@ -30,7 +30,7 @@ const Sidebar = ({ isOpen, toggle }) => {
             </Link>
           </li>
           <li>
-            <Link href='/working' passHref>
+            <Link href='/profile' passHref>
               <SidebarLink onClick={toggle}>Meu Perfil</SidebarLink>
             </Link>
           </li>
